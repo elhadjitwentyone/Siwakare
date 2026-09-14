@@ -14,17 +14,33 @@
       "oldPrice": null,
       "featured": false,
       "image": "/images/pack-decouverte.jpg",
-      "includes": ["1 dentifrice au siwak", "1 brosse à dents", "Guide d'utilisation"],
+      "includes": [
+        "1 dentifrice au siwak",
+        "1 brosse à dents",
+        "Guide d'utilisation"
+      ],
       "why": [
         "Prix d'appel pour découvrir le siwak à moindre coût",
         "100% naturel, sans plastique superflu",
         "Idéal pour un premier essai avant de passer au Pack Famille"
       ],
       "faq": [
-        { "q": "Combien de temps dure le pack ?", "a": "Le dentifrice dure en moyenne 3 à 4 semaines en usage quotidien." },
-        { "q": "Convient-il aux enfants ?", "a": "Oui, à partir de l'âge où l'enfant se brosse les dents seul, sous supervision." },
-        { "q": "Comment le conserver ?", "a": "À température ambiante, à l'abri de l'humidité directe." },
-        { "q": "Quels sont les délais de livraison ?", "a": "24 à 48h à Dakar, un peu plus pour les autres villes." }
+        {
+          "q": "Combien de temps dure le pack ?",
+          "a": "Le dentifrice dure en moyenne 3 à 4 semaines en usage quotidien."
+        },
+        {
+          "q": "Convient-il aux enfants ?",
+          "a": "Oui, à partir de l'âge où l'enfant se brosse les dents seul, sous supervision."
+        },
+        {
+          "q": "Comment le conserver ?",
+          "a": "À température ambiante, à l'abri de l'humidité directe."
+        },
+        {
+          "q": "Quels sont les délais de livraison ?",
+          "a": "24 à 48h à Dakar, un peu plus pour les autres villes."
+        }
       ]
     },
     {
@@ -35,17 +51,34 @@
       "oldPrice": 15000,
       "featured": true,
       "image": "/images/siwak-batons.jpg",
-      "includes": ["4 dentifrices au siwak", "4 brosses à dents", "1 étui de rangement familial", "Guide d'utilisation"],
+      "includes": [
+        "4 dentifrices au siwak",
+        "4 brosses à dents",
+        "1 étui de rangement familial",
+        "Guide d'utilisation"
+      ],
       "why": [
         "Le meilleur rapport quantité/prix pour une famille",
         "Une routine naturelle et économique pour tous",
         "Fini les brosses en plastique gardées trop longtemps"
       ],
       "faq": [
-        { "q": "Pour combien de personnes ce pack est-il prévu ?", "a": "Idéal pour une famille de 4 personnes, environ 1 mois d'usage." },
-        { "q": "Peut-on personnaliser les quantités ?", "a": "Oui, contacte-nous sur WhatsApp pour adapter le pack à ta famille." },
-        { "q": "Le paiement à la livraison est-il possible ?", "a": "Oui, en plus de Wave et Orange Money." },
-        { "q": "Livrez-vous en dehors de Dakar ?", "a": "Oui, à Thiès, Saly, Ziguinchor et d'autres grandes villes." }
+        {
+          "q": "Pour combien de personnes ce pack est-il prévu ?",
+          "a": "Idéal pour une famille de 4 personnes, environ 1 mois d'usage."
+        },
+        {
+          "q": "Peut-on personnaliser les quantités ?",
+          "a": "Oui, contacte-nous sur WhatsApp pour adapter le pack à ta famille."
+        },
+        {
+          "q": "Le paiement à la livraison est-il possible ?",
+          "a": "Oui, en plus de Wave et Orange Money."
+        },
+        {
+          "q": "Livrez-vous en dehors de Dakar ?",
+          "a": "Oui, à Thiès, Saly, Ziguinchor et d'autres grandes villes."
+        }
       ]
     },
     {
@@ -56,17 +89,33 @@
       "oldPrice": null,
       "featured": false,
       "image": "/images/dentifrice-siwak.jpg",
-      "includes": ["1 dentifrice au siwak", "1 brosse à dents", "1 étui de voyage"],
+      "includes": [
+        "1 dentifrice au siwak",
+        "1 brosse à dents",
+        "1 étui de voyage"
+      ],
       "why": [
         "Pratique pour voyager ou pour ton sac de sport",
         "Complet : tout ce qu'il faut en un seul pack",
         "Qualité naturelle Siwakare garantie"
       ],
       "faq": [
-        { "q": "L'étui est-il hermétique ?", "a": "Oui, il protège la brosse et évite les fuites de dentifrice." },
-        { "q": "Ce pack convient-il pour le Ramadan ou un voyage ?", "a": "Oui, c'est un usage courant pour les déplacements et le Ramadan." },
-        { "q": "Y a-t-il une garantie ?", "a": "Satisfait ou remboursé sous 7 à 15 jours pour une première commande." },
-        { "q": "Comment commander ?", "a": "Via le site ou directement sur WhatsApp, avec paiement Wave, Orange Money ou cash à la livraison." }
+        {
+          "q": "L'étui est-il hermétique ?",
+          "a": "Oui, il protège la brosse et évite les fuites de dentifrice."
+        },
+        {
+          "q": "Ce pack convient-il pour le Ramadan ou un voyage ?",
+          "a": "Oui, c'est un usage courant pour les déplacements et le Ramadan."
+        },
+        {
+          "q": "Y a-t-il une garantie ?",
+          "a": "Satisfait ou remboursé sous 7 à 15 jours pour une première commande."
+        },
+        {
+          "q": "Comment commander ?",
+          "a": "Via le site ou directement sur WhatsApp, avec paiement Wave, Orange Money ou cash à la livraison."
+        }
       ]
     }
   ]
