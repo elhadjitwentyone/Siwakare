@@ -1,0 +1,42 @@
+import fallback from "@/data/content.json";
+
+export type Product = {
+  slug: string;
+  name: string;
+  tagline: string;
+  price: number;
+  oldPrice: number | null;
+  featured: boolean;
+  image: string;
+  includes: string[];
+  why: string[];
+  faq: { q: string; a: string }[];
+};
+
+export type Content = {
+  hero: { title: string; subtitle: string; image: string };
+  whatsapp: string;
+  products: Product[];
+};
+
+const GITHUB_REPO = process.env.GITHUB_REPO; // ex: "owner/siwakare"
+const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
+
+// Le contenu (textes, prix, images des packs) est stocké dans data/content.json
+// sur GitHub. L'admin (/admin) le modifie directement via l'API GitHub — ça
+// n'a AUCUN impact sur les déploiements Vercel (aucun rebuild déclenché).
+// On lit ce fichier à chaque requête pour que les modifications soient
+// visibles immédiatement, sans redéploiement.
+export async function getContent(): Promise<Content> {
+  if (!GITHUB_REPO) return fallback as Content;
+  try {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/data/content.json`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return fallback as Content;
+    return (await res.json()) as Content;
+  } catch {
+    return fallback as Content;
+  }
+}
