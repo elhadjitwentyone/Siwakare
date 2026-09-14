@@ -5,6 +5,7 @@ import { getContent } from "@/lib/content";
 const GITHUB_REPO = process.env.GITHUB_REPO;
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const DEPLOY_HOOK_URL = process.env.DEPLOY_HOOK_URL;
 const FILE_PATH = "data/content.json";
 
 function authed(req: NextRequest) {
@@ -47,8 +48,7 @@ export async function PUT(req: NextRequest) {
     // fichier peut-être inexistant encore — on continue sans sha (création)
   }
 
-  // 2. Committer le nouveau contenu. Ceci ne déclenche AUCUN déploiement Vercel
-  // (le projet Vercel n'est pas relié en auto-deploy à ce repo).
+  // 2. Committer le nouveau contenu sur GitHub.
   const body = {
     message: "Mise à jour du contenu via /admin Siwakare",
     content: Buffer.from(JSON.stringify(updated, null, 2), "utf-8").toString("base64"),
@@ -60,6 +60,12 @@ export async function PUT(req: NextRequest) {
   if (!put.ok) {
     const err = await put.text();
     return NextResponse.json({ error: `Échec de la sauvegarde GitHub: ${err}` }, { status: 500 });
+  }
+
+  // 3. Déclencher un redéploiement Vercel (best-effort, ne bloque jamais la sauvegarde :
+  // le contenu est déjà en sécurité sur GitHub même si cet appel échoue).
+  if (DEPLOY_HOOK_URL) {
+    fetch(DEPLOY_HOOK_URL, { method: "POST" }).catch(() => {});
   }
 
   return NextResponse.json({ ok: true });
