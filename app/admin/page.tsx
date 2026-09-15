@@ -167,6 +167,7 @@ export default function AdminPage() {
         Modifie tout le contenu du site : accueil, produits, formules, témoignages, pages "Le siwak", "Livraison
         & paiement" et "Contact". Les images peuvent être téléversées directement.
       </p>
+      <p><a href="/admin/dashboard">📊 Voir le tableau de bord (ventes, visites)</a></p>
 
       <section style={{ marginTop: 30 }}>
         <h2>Accueil</h2>
