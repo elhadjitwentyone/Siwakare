@@ -34,13 +34,13 @@
         },
         {
           "id": "duo",
-          "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 pâtes Siwakare + 3 brosses à dents)",
+          "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 Dentifrices Siwakare + 3 brosses à dents)",
           "price": 6000,
           "image": "/images/1789476619997-5.jpeg"
         },
         {
           "id": "trio",
-          "label": "3 Siwakare achetées = 2 offertes (5 pâtes Siwakare + 5 brosses à dents)",
+          "label": "3 Siwakare achetées = 2 offertes (5 Dentifrices Siwakare + 5 brosses à dents)",
           "price": 9000,
           "image": "/images/1789476629268-6.jpeg"
         }
