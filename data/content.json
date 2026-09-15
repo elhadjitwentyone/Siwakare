@@ -30,19 +30,22 @@
           "id": "simple",
           "label": "1 Dentifrice Siwakare + 1 brosse à dents offerte",
           "price": 3000,
-          "image": "/images/1789476488621-5.jpeg"
+          "image": "/images/1789476488621-5.jpeg",
+          "oldPrice": 0
         },
         {
           "id": "duo",
           "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 Dentifrices Siwakare + 3 brosses à dents)",
           "price": 6000,
-          "image": "/images/1789476619997-5.jpeg"
+          "image": "/images/1789476619997-5.jpeg",
+          "oldPrice": 9000
         },
         {
           "id": "trio",
           "label": "3 Siwakare achetées = 2 offertes (5 Dentifrices Siwakare + 5 brosses à dents)",
           "price": 9000,
-          "image": "/images/1789476629268-6.jpeg"
+          "image": "/images/1789476629268-6.jpeg",
+          "oldPrice": 15000
         }
       ],
       "faq": [
@@ -69,7 +72,7 @@
       "name": "Bâton Siwak",
       "tagline": "Le bâton traditionnel, à l'état brut — le choix des puristes de la sunna.",
       "price": 1000,
-      "oldPrice": null,
+      "oldPrice": 1500,
       "featured": false,
       "outOfStock": true,
       "image": "/images/1789476805578-tuto-siwak.png",
