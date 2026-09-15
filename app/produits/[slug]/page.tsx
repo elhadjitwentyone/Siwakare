@@ -25,6 +25,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
       why={p.why}
       faq={p.faq}
       image={p.image}
+      outOfStock={p.outOfStock}
+      freeGift={p.freeGift}
+      bundles={p.bundles}
     />
   );
 }

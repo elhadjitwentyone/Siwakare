@@ -6,6 +6,7 @@
   --cream: #faf6ee;
   --text: #23291f;
   --muted: #5a6355;
+  --danger: #b3261e;
   --radius: 14px;
   color-scheme: light;
 }
@@ -68,11 +69,20 @@ p { margin: 0 0 1em; color: var(--muted); }
 .step { text-align: center; }
 .step .num { width: 42px; height: 42px; border-radius: 50%; background: var(--green-dark); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0 auto 12px; }
 
-.products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.products { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
 @media (max-width: 860px) { .products { grid-template-columns: 1fr; } }
 .product-card { background: #fff; border: 1px solid #ece4cf; border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 10px; position: relative; }
 .product-card.featured { border-color: var(--gold); box-shadow: 0 6px 24px rgba(201,150,47,.15); }
 .tag-best { position: absolute; top: -12px; right: 20px; background: var(--gold); color: #fff; font-size: .75rem; padding: 4px 12px; border-radius: 999px; }
+.tag-outofstock { position: absolute; top: -12px; right: 20px; background: var(--danger); color: #fff; font-size: .75rem; padding: 4px 12px; border-radius: 999px; z-index: 1; }
+.product-card.out-of-stock .product-media img { filter: grayscale(.6); opacity: .75; }
+.product-card.out-of-stock .price { color: var(--muted); }
+.free-gift { color: var(--green); font-weight: 600; font-size: .92rem; margin: 4px 0 14px; }
+.btn-disabled { display: inline-block; padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: .95rem; background: #e5e0d3; color: var(--muted); cursor: not-allowed; }
+.bundles { margin-top: 26px; padding-top: 20px; border-top: 1px solid #ece4cf; }
+.bundle-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 0; border-bottom: 1px solid #ece4cf; }
+.bundle-row:last-child { border-bottom: none; }
+.bundle-price { display: block; color: var(--green-dark); font-weight: 700; margin-top: 2px; }
 .price { font-size: 1.5rem; color: var(--green-dark); font-weight: bold; }
 .old-price { text-decoration: line-through; color: var(--muted); font-size: .95rem; margin-right: 8px; }
 ul.check { list-style: none; padding: 0; margin: 0 0 1em; }

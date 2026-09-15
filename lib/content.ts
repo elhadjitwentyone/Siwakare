@@ -1,5 +1,13 @@
 import fallback from "@/data/content.json";
 
+export type Bundle = {
+  qty: number;
+  free: number;
+  totalQty: number;
+  totalPrice: number;
+  label: string;
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -7,6 +15,9 @@ export type Product = {
   price: number;
   oldPrice: number | null;
   featured: boolean;
+  outOfStock?: boolean;
+  freeGift?: string;
+  bundles?: Bundle[];
   image: string;
   includes: string[];
   why: string[];

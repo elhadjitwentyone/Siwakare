@@ -89,7 +89,7 @@ export default function AdminPage() {
     <main style={{ maxWidth: 820, margin: "0 auto", padding: "40px 20px" }}>
       <h1>Admin Siwakare</h1>
       <p style={{ color: "#666" }}>
-        Modifie les textes, prix et images des packs. Enregistrer met le site à jour immédiatement, sans
+        Modifie les textes, prix et images des produits. Enregistrer met le site à jour immédiatement, sans
         redéploiement Vercel.
       </p>
 
@@ -160,7 +160,7 @@ export default function AdminPage() {
             style={{ width: "100%", padding: 10, marginBottom: 10 }}
           />
           {p.image && <img src={p.image} alt={p.name} style={{ maxWidth: 160, borderRadius: 8, marginBottom: 10 }} />}
-          <label>Contenu du pack (une ligne par élément)</label>
+          <label>Contenu du produit (une ligne par élément)</label>
           <textarea
             value={p.includes.join("\n")}
             onChange={(e) => updateProduct(i, { includes: e.target.value.split("\n").filter(Boolean) })}

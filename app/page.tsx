@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PriceTag } from "@/components/ui";
+import { ProductCard } from "@/components/ui";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { Reveal } from "@/components/Reveal";
 import { getContent } from "@/lib/content";
@@ -18,8 +18,8 @@ export default async function Home() {
             <h1>{hero.title}</h1>
             <p className="lead">{hero.subtitle}</p>
             <div className="btn-row">
-              <Link href="/produits" className="btn btn-primary">Voir nos packs</Link>
-              <WhatsAppCTA message="Salam, je souhaite commander un pack Siwakare." className="btn btn-whatsapp">
+              <Link href="/produits" className="btn btn-primary">Voir nos produits</Link>
+              <WhatsAppCTA message="Salam, je souhaite commander un produit Siwakare." className="btn btn-whatsapp">
                 Commander sur WhatsApp
               </WhatsAppCTA>
             </div>
@@ -31,7 +31,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="hero-visual">
-            <img src={hero.image} alt="Pack Siwakare" />
+            <img src={hero.image} alt="Siwakare" />
           </div>
         </div>
       </section>
@@ -58,7 +58,7 @@ export default async function Home() {
             <Reveal delay={200}><div className="card">
               <span className="icon">🪙</span>
               <h3>Économique</h3>
-              <p>Un bâton dure plusieurs semaines. Moins de dépenses en brosses en plastique — nos packs famille couvrent toute la maison.</p>
+              <p>Un bâton dure plusieurs semaines. Moins de dépenses en brosses en plastique — les offres groupées sur la pâte dentifrice couvrent toute la maison.</p>
             </div></Reveal>
           </div>
           <Reveal>
@@ -96,27 +96,18 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section" id="packs">
+      <section className="section" id="produits">
         <div className="container">
           <Reveal>
             <div className="section-title">
-              <h2>Nos packs</h2>
-              <p>Choisis la formule adaptée à ton quotidien ou à toute ta famille.</p>
+              <h2>Nos produits</h2>
+              <p>Le siwak sous toutes ses formes, pour ton quotidien ou toute ta famille.</p>
             </div>
           </Reveal>
           <div className="products">
             {products.map((p, i) => (
               <Reveal key={p.slug} delay={i * 100}>
-                <div className={`product-card ${p.featured ? "featured" : ""}`}>
-                  {p.featured && <span className="tag-best">Best-seller</span>}
-                  <div className="product-media">
-                    <img src={p.image} alt={p.name} />
-                  </div>
-                  <h3>{p.name}</h3>
-                  <p>{p.tagline}</p>
-                  <PriceTag fcfa={p.price} />
-                  <Link href={`/produits/${p.slug}`} className="btn btn-outline">Voir le pack</Link>
-                </div>
+                <ProductCard p={p} ctaLabel="Voir le produit" />
               </Reveal>
             ))}
           </div>
@@ -133,7 +124,7 @@ export default async function Home() {
           <div className="testimonials">
             <Reveal delay={0}><div className="testimonial">
               <div className="stars">★★★★★</div>
-              <p>« Haleine fraîche toute la journée et je sais que je suis dans la sunna. Le pack famille couvre toute la maison. »</p>
+              <p>« Haleine fraîche toute la journée et je sais que je suis dans la sunna. L'offre 3 pâtes achetées, 2 offertes couvre toute la maison. »</p>
               <strong>Aïssatou, Dakar</strong>
             </div></Reveal>
             <Reveal delay={100}><div className="testimonial">
@@ -183,12 +174,12 @@ export default async function Home() {
       <section className="cta-band">
         <div className="container">
           <h2>Envie de tester le siwak ?</h2>
-          <p>Commande ton pack en quelques minutes, par le site ou directement sur WhatsApp.</p>
+          <p>Commande ton produit en quelques minutes, par le site ou directement sur WhatsApp.</p>
           <div className="btn-row" style={{ justifyContent: "center" }}>
             <Link href="/produits" className="btn btn-primary" style={{ background: "#fff", color: "var(--green-dark)" }}>
-              Voir les packs
+              Voir les produits
             </Link>
-            <WhatsAppCTA message="Salam, je souhaite commander un pack Siwakare." className="btn btn-whatsapp">
+            <WhatsAppCTA message="Salam, je souhaite commander un produit Siwakare." className="btn btn-whatsapp">
               Commander sur WhatsApp
             </WhatsAppCTA>
           </div>
