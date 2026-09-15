@@ -89,8 +89,8 @@ p { margin: 0 0 1em; color: var(--muted); }
 }
 .variant-option:hover { border-color: var(--gold); }
 .variant-option.selected { border-color: var(--green-dark); background: var(--green-light); }
-.variant-label { font-weight: 600; color: var(--text); font-size: .95rem; }
-.variant-price { font-weight: 700; color: var(--green-dark); white-space: nowrap; }
+.variant-label { font-weight: 600; color: var(--text); font-size: .95rem; flex: 1; min-width: 0; }
+.variant-price { font-weight: 700; color: var(--green-dark); white-space: nowrap; flex-shrink: 0; }
 
 /* Modale de commande (nom, adresse, téléphone) avant l'ouverture de WhatsApp */
 .modal-backdrop {
@@ -198,9 +198,12 @@ ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--
   gap: 12px;
   box-shadow: 0 -6px 20px rgba(31,61,43,.1);
 }
-.sticky-cta-info { display: flex; flex-direction: column; line-height: 1.25; }
-.sticky-cta-info strong { font-size: .85rem; color: var(--green-dark); }
-.sticky-cta .btn { padding: 10px 20px; white-space: nowrap; }
+.sticky-cta-info { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; flex: 1; }
+.sticky-cta-info strong {
+  font-size: .85rem; color: var(--green-dark);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sticky-cta .btn { padding: 10px 20px; white-space: nowrap; flex-shrink: 0; }
 @media (max-width: 640px) {
   .sticky-cta { display: flex; }
   main { padding-bottom: 72px; }
