@@ -1,4 +1,5 @@
-import { waLink } from "@/components/ui";
+import { WhatsAppCTA } from "@/components/WhatsAppCTA";
+import { ContactForm } from "@/components/ContactForm";
 
 export const metadata = { title: "Contact — Siwakare" };
 
@@ -18,25 +19,15 @@ export default function Contact() {
             <span className="icon">💬</span>
             <h3>WhatsApp</h3>
             <p>Le moyen le plus rapide de commander ou poser une question.</p>
-            <a href={waLink("Salam, je vous contacte depuis le site Siwakare.")} target="_blank" className="btn btn-whatsapp">
+            <WhatsAppCTA message="Salam, je vous contacte depuis le site Siwakare." className="btn btn-whatsapp">
               Discuter sur WhatsApp
-            </a>
+            </WhatsAppCTA>
           </div>
           <div className="card">
             <span className="icon">✉️</span>
             <h3>Formulaire</h3>
             <p>Laisse-nous ton message, on te recontacte au plus vite.</p>
-            <form
-              action={waLink("Salam, voici mon message : ")}
-              method="get"
-              target="_blank"
-              style={{ display: "flex", flexDirection: "column", gap: 10 }}
-            >
-              <input name="nom" placeholder="Ton nom" style={{ padding: 10, borderRadius: 8, border: "1px solid #ece4cf" }} />
-              <input name="tel" placeholder="Ton téléphone" style={{ padding: 10, borderRadius: 8, border: "1px solid #ece4cf" }} />
-              <textarea placeholder="Ton message" rows={4} style={{ padding: 10, borderRadius: 8, border: "1px solid #ece4cf" }} />
-              <button type="submit" className="btn btn-primary">Envoyer via WhatsApp</button>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>

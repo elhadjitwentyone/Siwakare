@@ -1,4 +1,4 @@
-import { waLink } from "@/components/ui";
+import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 
 export const metadata = { title: "Livraison & paiement — Siwakare" };
 
@@ -39,13 +39,12 @@ export default function Livraison() {
         <div className="container" style={{ textAlign: "center" }}>
           <h2>Une question sur ta commande ?</h2>
           <p>Contacte-nous directement sur WhatsApp pour commander ou suivre ta livraison.</p>
-          <a
-            href={waLink("Salam, j'ai une question sur la livraison ou le paiement d'une commande Siwakare.")}
-            target="_blank"
+          <WhatsAppCTA
+            message="Salam, j'ai une question sur la livraison ou le paiement d'une commande Siwakare."
             className="btn btn-whatsapp"
           >
             Écrire sur WhatsApp
-          </a>
+          </WhatsAppCTA>
         </div>
       </section>
     </main>

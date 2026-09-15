@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { waLink, PriceTag } from "@/components/ui";
+import { PriceTag } from "@/components/ui";
+import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { Reveal } from "@/components/Reveal";
 import { getContent } from "@/lib/content";
 
@@ -18,9 +19,9 @@ export default async function Home() {
             <p className="lead">{hero.subtitle}</p>
             <div className="btn-row">
               <Link href="/produits" className="btn btn-primary">Voir nos packs</Link>
-              <a href={waLink("Salam, je souhaite commander un pack Siwakare.")} target="_blank" className="btn btn-whatsapp">
+              <WhatsAppCTA message="Salam, je souhaite commander un pack Siwakare." className="btn btn-whatsapp">
                 Commander sur WhatsApp
-              </a>
+              </WhatsAppCTA>
             </div>
             <div className="badges">
               <span className="badge">🌿 100% naturel</span>
@@ -187,9 +188,9 @@ export default async function Home() {
             <Link href="/produits" className="btn btn-primary" style={{ background: "#fff", color: "var(--green-dark)" }}>
               Voir les packs
             </Link>
-            <a href={waLink("Salam, je souhaite commander un pack Siwakare.")} target="_blank" className="btn btn-whatsapp">
+            <WhatsAppCTA message="Salam, je souhaite commander un pack Siwakare." className="btn btn-whatsapp">
               Commander sur WhatsApp
-            </a>
+            </WhatsAppCTA>
           </div>
         </div>
       </section>

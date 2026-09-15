@@ -139,3 +139,29 @@ ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--
 .btn:hover { transform: translateY(-2px); }
 
 .wa-float { animation: floatY 3s ease-in-out infinite; }
+
+.reassurance { font-size: .85rem; color: var(--muted); margin-top: 14px; }
+
+/* Barre de commande collée en bas de l'écran sur mobile, seule surface où
+   le trafic pub (FB/IG) arrive en majorité. Cachée sur desktop : le CTA
+   du haut de page suffit déjà là-bas. */
+.sticky-cta {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 30;
+  background: #fff;
+  border-top: 1px solid #e3dcc9;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 -6px 20px rgba(31,61,43,.1);
+}
+.sticky-cta-info { display: flex; flex-direction: column; line-height: 1.25; }
+.sticky-cta-info strong { font-size: .85rem; color: var(--green-dark); }
+.sticky-cta .btn { padding: 10px 20px; white-space: nowrap; }
+@media (max-width: 640px) {
+  .sticky-cta { display: flex; }
+  main { padding-bottom: 72px; }
+}

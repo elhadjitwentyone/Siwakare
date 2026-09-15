@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { WhatsAppCTA } from "@/components/WhatsAppCTA";
+import { TrackViewContent } from "@/components/TrackViewContent";
 
 export const WHATSAPP_NUMBER = "221779978756"; // à remplacer par le numéro dédié Siwakare
 
@@ -19,13 +21,12 @@ export function Header() {
           <Link href="/livraison-paiement">Livraison & paiement</Link>
           <Link href="/contact">Contact</Link>
         </nav>
-        <a
+        <WhatsAppCTA
           className="btn btn-whatsapp header-cta"
-          href={waLink("Salam, je souhaite avoir plus d'infos sur les packs Siwakare.")}
-          target="_blank"
+          message="Salam, je souhaite avoir plus d'infos sur les packs Siwakare."
         >
           WhatsApp
-        </a>
+        </WhatsAppCTA>
       </div>
     </header>
   );
@@ -50,9 +51,9 @@ export function Footer() {
         </div>
         <div>
           <h4>Commander</h4>
-          <a href={waLink("Salam, je veux commander un pack Siwakare.")} target="_blank">
+          <WhatsAppCTA message="Salam, je veux commander un pack Siwakare.">
             Commander sur WhatsApp
-          </a>
+          </WhatsAppCTA>
           <p>Paiement : Wave, Orange Money, cash à la livraison</p>
         </div>
       </div>
@@ -63,14 +64,12 @@ export function Footer() {
 
 export function WhatsAppFloating() {
   return (
-    <a
+    <WhatsAppCTA
       className="wa-float"
-      href={waLink("Salam, j'ai une question sur Siwakare.")}
-      target="_blank"
-      aria-label="Contacter sur WhatsApp"
+      message="Salam, j'ai une question sur Siwakare."
     >
-      💬
-    </a>
+      <span aria-label="Contacter sur WhatsApp" role="img">💬</span>
+    </WhatsAppCTA>
   );
 }
 
@@ -100,6 +99,7 @@ export function ProductPage({
   const orderMsg = `Salam, je souhaite commander le ${name} (${fcfa.toLocaleString("fr-FR")} FCFA).`;
   return (
     <main>
+      <TrackViewContent name={name} price={fcfa} />
       <section className="section">
         <div className="container">
           <p className="breadcrumb">
@@ -129,13 +129,20 @@ export function ProductPage({
               </ul>
 
               <div className="btn-row" style={{ marginTop: 24 }}>
-                <a href={waLink(orderMsg)} target="_blank" className="btn btn-whatsapp">
+                <WhatsAppCTA
+                  message={orderMsg}
+                  className="btn btn-whatsapp"
+                  event="InitiateCheckout"
+                  contentName={name}
+                  value={fcfa}
+                >
                   Commander sur WhatsApp
-                </a>
+                </WhatsAppCTA>
                 <Link href="/livraison-paiement" className="btn btn-outline">
                   Livraison & paiement
                 </Link>
               </div>
+              <p className="reassurance">🔒 Satisfait ou remboursé sous 7 à 15 jours pour ta première commande • Paiement à la livraison, Wave ou Orange Money</p>
             </div>
             <div className="placeholder-img hero-visual">
               {image ? <img src={image} alt={name} /> : "🌿"}
@@ -191,12 +198,34 @@ export function ProductPage({
           <h2>Prêt à commander ton {name} ?</h2>
           <p>Paiement Wave, Orange Money ou cash à la livraison.</p>
           <div className="btn-row" style={{ justifyContent: "center" }}>
-            <a href={waLink(orderMsg)} target="_blank" className="btn btn-whatsapp">
+            <WhatsAppCTA
+              message={orderMsg}
+              className="btn btn-whatsapp"
+              event="InitiateCheckout"
+              contentName={name}
+              value={fcfa}
+            >
               Commander maintenant
-            </a>
+            </WhatsAppCTA>
           </div>
         </div>
       </section>
+
+      <div className="sticky-cta">
+        <div className="sticky-cta-info">
+          <strong>{name}</strong>
+          <PriceTag fcfa={fcfa} />
+        </div>
+        <WhatsAppCTA
+          message={orderMsg}
+          className="btn btn-whatsapp"
+          event="InitiateCheckout"
+          contentName={name}
+          value={fcfa}
+        >
+          Commander
+        </WhatsAppCTA>
+      </div>
     </main>
   );
 }
