@@ -2,7 +2,7 @@
   "hero": {
     "title": "Le siwak : la brosse à dents naturelle, traditionnelle et écologique.",
     "subtitle": "Allie hygiène moderne et tradition prophétique. Siwakare t'apporte le siwak et ses produits dérivés, livrés chez toi à Dakar et dans les grandes villes du Sénégal.",
-    "image": "/images/dentifrice-siwak.jpg"
+    "image": "/images/1789476182176-bannieremobsiwak.png"
   },
   "whatsapp": "221779978756",
   "products": [
@@ -14,7 +14,7 @@
       "oldPrice": null,
       "featured": true,
       "freeGift": "1 brosse à dents offerte",
-      "image": "/images/dentifrice-siwak.jpg",
+      "image": "/images/1789476168239-rmvbg-siwakare.png",
       "includes": [
         "1 pâte dentifrice au siwak",
         "1 brosse à dents offerte",
@@ -30,19 +30,19 @@
           "id": "simple",
           "label": "1 Dentifrice Siwakare + 1 brosse à dents offerte",
           "price": 3000,
-          "image": "/images/dentifrice-siwak.jpg"
+          "image": "/images/1789476488621-5.jpeg"
         },
         {
           "id": "duo",
-          "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 Dentifrices Siwakare + 3 brosses à dents)",
+          "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 pâtes Siwakare + 3 brosses à dents)",
           "price": 6000,
-          "image": "/images/dentifrice-siwak.jpg"
+          "image": "/images/1789476619997-5.jpeg"
         },
         {
           "id": "trio",
-          "label": "3 Siwakare achetées = 2 offertes (5 Dentifrices Siwakare + 5 brosses à dents)",
+          "label": "3 Siwakare achetées = 2 offertes (5 pâtes Siwakare + 5 brosses à dents)",
           "price": 9000,
-          "image": "/images/dentifrice-siwak.jpg"
+          "image": "/images/1789476629268-6.jpeg"
         }
       ],
       "faq": [
@@ -72,7 +72,7 @@
       "oldPrice": null,
       "featured": false,
       "outOfStock": true,
-      "image": "/images/siwak-batons.jpg",
+      "image": "/images/1789476805578-tuto-siwak.png",
       "includes": [
         "1 bâton de siwak brut (miswak traditionnel)"
       ],
@@ -105,16 +105,16 @@
     {
       "stars": 5,
       "text": "Haleine fraîche toute la journée et je sais que je suis dans la sunna. L'offre 3 pâtes achetées, 2 offertes couvre toute la maison.",
-      "author": "Aïssatou, Dakar"
+      "author": "Aïssatou, Thies"
     },
     {
       "stars": 5,
       "text": "Livraison rapide, paiement à la livraison, ça m'a rassuré pour ma première commande.",
-      "author": "Modou, Thiès"
+      "author": "Modou, Dakar"
     },
     {
       "stars": 5,
-      "text": "On m'avait parlé du siwak depuis longtemps, Siwakare m'a permis de m'y mettre facilement.",
+      "text": "On m'avait parlé du siwak depuis longtemps, Siwakare m'a permis de m'y mettre facilement. Les offres sont superbes et le produit vraiment de qual",
       "author": "Fatou, Saly"
     }
   ],
@@ -127,7 +127,7 @@
       "Propriétés antibactériennes naturelles",
       "Alternative 100% naturelle, biodégradable et sans plastique"
     ],
-    "image1": "/images/siwak-batons.jpg",
+    "image1": "/images/1789476726177-design1.png",
     "propheticIntro": "Le siwak occupe une place particulière dans la tradition prophétique (sunna). Le Prophète Muhammad (paix et bénédictions sur lui) l'utilisait régulièrement : au réveil, avant les prières, avant de réciter le Coran, et en entrant chez lui.",
     "quotes": [
       {
@@ -144,11 +144,16 @@
   },
   "livraison": {
     "zones": [
+      "1000 FCFA",
       "Dakar et banlieue : livraison sous 24 à 48h",
       "Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours",
       "Autres localités : sur demande, contacte-nous sur WhatsApp"
     ],
-    "paymentMethods": ["Wave", "Orange Money", "Cash à la livraison"]
+    "paymentMethods": [
+      "Wave",
+      "Orange Money",
+      "Cash à la livraison"
+    ]
   },
   "contact": {
     "intro": "Le moyen le plus rapide de commander ou poser une question."
