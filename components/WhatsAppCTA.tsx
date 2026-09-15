@@ -40,13 +40,17 @@ export function WhatsAppCTA({
     setFinalMessage(message + utmSourceTag(getStoredUtm()));
   }, [message]);
 
-  function track() {
-    trackEvent(event, {
-      content_name: contentName,
-      content_type: "product",
-      value,
-      currency: "XOF",
-    });
+  function track(lead?: LeadInfo) {
+    trackEvent(
+      event,
+      {
+        content_name: contentName,
+        content_type: "product",
+        value,
+        currency: "XOF",
+      },
+      { phone: lead?.phone }
+    );
   }
 
   if (event === "InitiateCheckout") {
@@ -61,7 +65,7 @@ export function WhatsAppCTA({
             price={value ?? 0}
             onClose={() => setShowModal(false)}
             onSubmit={(lead) => {
-              track();
+              track(lead);
               window.open(waLink(appendLead(finalMessage, lead)), "_blank");
               setShowModal(false);
             }}
@@ -72,7 +76,7 @@ export function WhatsAppCTA({
   }
 
   return (
-    <a href={waLink(finalMessage)} target="_blank" className={className} onClick={track}>
+    <a href={waLink(finalMessage)} target="_blank" className={className} onClick={() => track()}>
       {children}
     </a>
   );

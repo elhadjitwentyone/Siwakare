@@ -10,11 +10,59 @@ const GA4_EVENT_MAP: Record<TrackEventName, string> = {
   InitiateCheckout: "begin_checkout",
 };
 
-export function trackEvent(name: TrackEventName, params: Record<string, unknown> = {}) {
+function getCookie(name: string): string | undefined {
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+function newEventId(): string {
+  const c = (globalThis as any).crypto;
+  if (c?.randomUUID) return c.randomUUID();
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+// Envoie le même événement côté serveur (Meta Conversions API), avec le
+// même event_id que le Pixel navigateur pour que Meta déduplique les deux
+// au lieu de compter l'événement deux fois. Best-effort : si /api/track
+// échoue ou que le Pixel n'est pas configuré, ça ne bloque jamais l'achat.
+function sendServerEvent(
+  name: TrackEventName,
+  eventId: string,
+  customData: Record<string, unknown>,
+  userData: { phone?: string }
+) {
+  try {
+    const payload = JSON.stringify({
+      event_name: name,
+      event_id: eventId,
+      custom_data: customData,
+      phone: userData.phone,
+      fbp: getCookie("_fbp"),
+      fbc: getCookie("_fbc"),
+      event_source_url: window.location.href,
+    });
+    const sent = navigator.sendBeacon?.("/api/track", new Blob([payload], { type: "application/json" }));
+    if (!sent) {
+      fetch("/api/track", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true }).catch(
+        () => {}
+      );
+    }
+  } catch {
+    // best-effort
+  }
+}
+
+export function trackEvent(
+  name: TrackEventName,
+  customData: Record<string, unknown> = {},
+  userData: { phone?: string } = {}
+) {
   if (typeof window === "undefined") return;
   const w = window as any;
-  if (typeof w.fbq === "function") w.fbq("track", name, params);
-  if (typeof w.gtag === "function") w.gtag("event", GA4_EVENT_MAP[name], params);
+  const eventId = newEventId();
+  if (typeof w.fbq === "function") w.fbq("track", name, customData, { eventID: eventId });
+  if (typeof w.gtag === "function") w.gtag("event", GA4_EVENT_MAP[name], customData);
+  sendServerEvent(name, eventId, customData, userData);
 }
 
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"] as const;
