@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
-import { TrackViewContent } from "@/components/TrackViewContent";
-import type { Product, Bundle } from "@/lib/content";
+import { ProductOrder } from "@/components/ProductOrder";
+import { PriceTag } from "@/components/PriceTag";
+import type { Product, Variant } from "@/lib/content";
 
 export const WHATSAPP_NUMBER = "221779978756"; // à remplacer par le numéro dédié Siwakare
 
@@ -74,10 +75,6 @@ export function WhatsAppFloating() {
   );
 }
 
-export function PriceTag({ fcfa }: { fcfa: number }) {
-  return <span className="price">{fcfa.toLocaleString("fr-FR")} FCFA</span>;
-}
-
 export function ProductCard({ p, ctaLabel }: { p: Product; ctaLabel: string }) {
   return (
     <div className={`product-card ${p.featured ? "featured" : ""} ${p.outOfStock ? "out-of-stock" : ""}`}>
@@ -106,7 +103,7 @@ export function ProductPage({
   image,
   outOfStock,
   freeGift,
-  bundles,
+  variants,
 }: {
   name: string;
   tagline: string;
@@ -118,95 +115,45 @@ export function ProductPage({
   image?: string;
   outOfStock?: boolean;
   freeGift?: string;
-  bundles?: Bundle[];
+  variants?: Variant[];
 }) {
-  const orderMsg = `Salam, je souhaite commander le ${name} (${fcfa.toLocaleString("fr-FR")} FCFA).`;
+  const startVariant = variants?.[0];
+  const bandContentName = startVariant ? `${name} — ${startVariant.label}` : name;
+  const bandPrice = startVariant?.price ?? fcfa;
+  const bandMsg = startVariant
+    ? `Salam, je souhaite commander : ${name} — ${startVariant.label} (${bandPrice.toLocaleString("fr-FR")} FCFA).`
+    : `Salam, je souhaite commander le ${name} (${fcfa.toLocaleString("fr-FR")} FCFA).`;
   return (
     <main>
-      <TrackViewContent name={name} price={fcfa} />
       <section className="section">
         <div className="container">
           <p className="breadcrumb">
             <Link href="/produits">Nos produits</Link> / {name}
           </p>
-          <div className="two-col">
-            <div>
-              <h1>{name}</h1>
-              <p style={{ fontSize: "1.1rem" }}>{tagline}</p>
-              <div style={{ marginBottom: 8 }}>
-                {oldFcfa && <span className="old-price">{oldFcfa.toLocaleString("fr-FR")} FCFA</span>}
-                <PriceTag fcfa={fcfa} />
-              </div>
-              {freeGift && <p className="free-gift">🎁 {freeGift}</p>}
+          <ProductOrder
+            name={name}
+            tagline={tagline}
+            image={image}
+            price={fcfa}
+            oldPrice={oldFcfa}
+            freeGift={freeGift}
+            outOfStock={outOfStock}
+            variants={variants}
+          />
 
-              <h3>Ce que tu reçois</h3>
-              <ul className="check">
-                {includes.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+          <h3>Ce que tu reçois</h3>
+          <ul className="check">
+            {includes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
 
-              <h3>Pourquoi choisir ce produit</h3>
-              <ul className="check">
-                {why.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-
-              <div className="btn-row" style={{ marginTop: 24 }}>
-                {outOfStock ? (
-                  <span className="btn btn-disabled" aria-disabled="true">Rupture de stock</span>
-                ) : (
-                  <WhatsAppCTA
-                    message={orderMsg}
-                    className="btn btn-whatsapp"
-                    event="InitiateCheckout"
-                    contentName={name}
-                    value={fcfa}
-                  >
-                    Commander sur WhatsApp
-                  </WhatsAppCTA>
-                )}
-                <Link href="/livraison-paiement" className="btn btn-outline">
-                  Livraison & paiement
-                </Link>
-              </div>
-              {outOfStock ? (
-                <p className="reassurance">📦 En rupture de stock — le réassort est en cours, écris-nous sur WhatsApp pour être prévenu(e).</p>
-              ) : (
-                <p className="reassurance">🔒 Satisfait ou remboursé sous 7 à 15 jours pour ta première commande • Paiement à la livraison, Wave ou Orange Money</p>
-              )}
-
-              {bundles && bundles.length > 0 && (
-                <div className="bundles">
-                  <h3>Offres groupées</h3>
-                  {bundles.map((b) => {
-                    const bundleMsg = `Salam, je souhaite commander l'offre "${b.label}" sur ${name} (${b.totalPrice.toLocaleString("fr-FR")} FCFA).`;
-                    return (
-                      <div className="bundle-row" key={b.label}>
-                        <div>
-                          <strong>{b.label}</strong>
-                          <span className="bundle-price">{b.totalPrice.toLocaleString("fr-FR")} FCFA</span>
-                        </div>
-                        <WhatsAppCTA
-                          message={bundleMsg}
-                          className="btn btn-outline"
-                          event="InitiateCheckout"
-                          contentName={`${name} — ${b.label}`}
-                          value={b.totalPrice}
-                        >
-                          Commander cette offre
-                        </WhatsAppCTA>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-            <div className="placeholder-img hero-visual">
-              {image ? <img src={image} alt={name} /> : "🌿"}
-            </div>
-          </div>
+          <h3>Pourquoi choisir ce produit</h3>
+          <ul className="check">
+            {why.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -259,35 +206,17 @@ export function ProductPage({
             <p>Paiement Wave, Orange Money ou cash à la livraison.</p>
             <div className="btn-row" style={{ justifyContent: "center" }}>
               <WhatsAppCTA
-                message={orderMsg}
+                message={bandMsg}
                 className="btn btn-whatsapp"
                 event="InitiateCheckout"
-                contentName={name}
-                value={fcfa}
+                contentName={bandContentName}
+                value={bandPrice}
               >
                 Commander maintenant
               </WhatsAppCTA>
             </div>
           </div>
         </section>
-      )}
-
-      {!outOfStock && (
-        <div className="sticky-cta">
-          <div className="sticky-cta-info">
-            <strong>{name}</strong>
-            <PriceTag fcfa={fcfa} />
-          </div>
-          <WhatsAppCTA
-            message={orderMsg}
-            className="btn btn-whatsapp"
-            event="InitiateCheckout"
-            contentName={name}
-            value={fcfa}
-          >
-            Commander
-          </WhatsAppCTA>
-        </div>
       )}
     </main>
   );

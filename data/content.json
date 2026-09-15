@@ -25,20 +25,24 @@
         "Une brosse à dents offerte pour bien démarrer",
         "100% naturel, sans plastique superflu"
       ],
-      "bundles": [
+      "variants": [
         {
-          "qty": 2,
-          "free": 1,
-          "totalQty": 3,
-          "totalPrice": 6000,
-          "label": "2 pâtes achetées = la 3ème offerte"
+          "id": "simple",
+          "label": "1 pâte + 1 brosse offerte",
+          "price": 3000,
+          "image": "/images/dentifrice-siwak.jpg"
         },
         {
-          "qty": 3,
-          "free": 2,
-          "totalQty": 5,
-          "totalPrice": 9000,
-          "label": "3 pâtes achetées = 2 offertes"
+          "id": "duo",
+          "label": "2 achetées = 3ème offerte (3 pâtes + 2 brosses)",
+          "price": 6000,
+          "image": "/images/dentifrice-siwak.jpg"
+        },
+        {
+          "id": "trio",
+          "label": "3 achetées = 2 offertes (5 pâtes + 3 brosses)",
+          "price": 9000,
+          "image": "/images/dentifrice-siwak.jpg"
         }
       ],
       "faq": [

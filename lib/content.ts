@@ -1,11 +1,14 @@
 import fallback from "@/data/content.json";
 
-export type Bundle = {
-  qty: number;
-  free: number;
-  totalQty: number;
-  totalPrice: number;
+// Une variante = une formule d'achat pour le même produit (unité seule,
+// offre groupée...). Le client choisit une variante ; prix et image
+// s'ajustent en conséquence.
+export type Variant = {
+  id: string;
   label: string;
+  price: number;
+  oldPrice?: number | null;
+  image?: string;
 };
 
 export type Product = {
@@ -17,7 +20,7 @@ export type Product = {
   featured: boolean;
   outOfStock?: boolean;
   freeGift?: string;
-  bundles?: Bundle[];
+  variants?: Variant[];
   image: string;
   includes: string[];
   why: string[];

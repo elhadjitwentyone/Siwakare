@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { products } = await getContent();
   const p = products.find((x) => x.slug === params.slug);
-  return { title: p ? `${p.name} — Siwakare` : "Pack — Siwakare" };
+  return { title: p ? `${p.name} — Siwakare` : "Produit — Siwakare" };
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       image={p.image}
       outOfStock={p.outOfStock}
       freeGift={p.freeGift}
-      bundles={p.bundles}
+      variants={p.variants}
     />
   );
 }
