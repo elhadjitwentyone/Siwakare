@@ -89,8 +89,21 @@ export function ProductCard({ p, ctaLabel }: { p: Product; ctaLabel: string }) {
       </div>
       <h3>{p.name}</h3>
       <p>{p.tagline}</p>
-      {p.freeGift && <p className="free-gift">🎁 {p.freeGift}</p>}
-      <PriceTag fcfa={p.price} />
+      {p.variants && p.variants.length > 0 ? (
+        <ul className="card-variant-list">
+          {p.variants.map((v) => (
+            <li key={v.id}>
+              <span>{v.label}</span>
+              <span className="card-variant-price">{v.price.toLocaleString("fr-FR")} FCFA</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <>
+          {p.freeGift && <p className="free-gift">🎁 {p.freeGift}</p>}
+          <PriceTag fcfa={p.price} />
+        </>
+      )}
       <Link href={`/produits/${p.slug}`} className="btn btn-outline">{ctaLabel}</Link>
     </div>
   );
