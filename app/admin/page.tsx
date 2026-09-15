@@ -310,13 +310,28 @@ export default function AdminPage() {
                 onChange={(e) => updateVariant(i, vi, { label: e.target.value })}
                 style={inputStyle}
               />
-              <label>Prix (FCFA)</label>
-              <input
-                type="number"
-                value={v.price}
-                onChange={(e) => updateVariant(i, vi, { price: Number(e.target.value) })}
-                style={inputStyle}
-              />
+              <div style={{ display: "flex", gap: 10 }}>
+                <div style={{ flex: 1 }}>
+                  <label>Prix (FCFA)</label>
+                  <input
+                    type="number"
+                    value={v.price}
+                    onChange={(e) => updateVariant(i, vi, { price: Number(e.target.value) })}
+                    style={inputStyle}
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label>Prix barré (optionnel)</label>
+                  <input
+                    type="number"
+                    value={v.oldPrice ?? ""}
+                    onChange={(e) =>
+                      updateVariant(i, vi, { oldPrice: e.target.value ? Number(e.target.value) : null })
+                    }
+                    style={inputStyle}
+                  />
+                </div>
+              </div>
               <ImageField
                 label="Image de cette formule"
                 value={v.image || ""}

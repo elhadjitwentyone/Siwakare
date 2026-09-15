@@ -94,7 +94,10 @@ export function ProductCard({ p, ctaLabel }: { p: Product; ctaLabel: string }) {
           {p.variants.map((v) => (
             <li key={v.id}>
               <span>{v.label}</span>
-              <span className="card-variant-price">{v.price.toLocaleString("fr-FR")} FCFA</span>
+              <span className="card-variant-price">
+                {v.oldPrice && <span className="old-price">{v.oldPrice.toLocaleString("fr-FR")} FCFA</span>}
+                {v.price.toLocaleString("fr-FR")} FCFA
+              </span>
             </li>
           ))}
         </ul>

@@ -59,7 +59,12 @@ export function ProductOrder({
                   aria-pressed={v.id === selected?.id}
                 >
                   <span className="variant-label">{v.label}</span>
-                  <span className="variant-price">{v.price.toLocaleString("fr-FR")} FCFA</span>
+                  <span className="variant-price">
+                    {v.oldPrice ? (
+                      <span className="old-price">{v.oldPrice.toLocaleString("fr-FR")} FCFA</span>
+                    ) : null}
+                    {v.price.toLocaleString("fr-FR")} FCFA
+                  </span>
                 </button>
               ))}
             </div>
