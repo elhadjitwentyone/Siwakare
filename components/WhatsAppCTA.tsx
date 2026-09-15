@@ -52,7 +52,7 @@ export function WhatsAppCTA({
   if (event === "InitiateCheckout") {
     return (
       <>
-        <button type="button" className={className} onClick={() => setShowModal(true)}>
+        <button type="button" className={className || "wa-cta-reset"} onClick={() => setShowModal(true)}>
           {children}
         </button>
         {showModal && (

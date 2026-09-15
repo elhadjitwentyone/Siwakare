@@ -1,8 +1,11 @@
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
+import { getContent } from "@/lib/content";
 
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Livraison & paiement — Siwakare" };
 
-export default function Livraison() {
+export default async function Livraison() {
+  const { livraison } = await getContent();
   return (
     <main>
       <section className="page-hero">
@@ -18,18 +21,18 @@ export default function Livraison() {
             <span className="icon">🚚</span>
             <h3>Zones desservies</h3>
             <ul className="check">
-              <li>Dakar et banlieue : livraison sous 24 à 48h</li>
-              <li>Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours</li>
-              <li>Autres localités : sur demande, contacte-nous sur WhatsApp</li>
+              {livraison.zones.map((z) => (
+                <li key={z}>{z}</li>
+              ))}
             </ul>
           </div>
           <div className="card">
             <span className="icon">📱</span>
             <h3>Modes de paiement</h3>
             <ul className="check">
-              <li>Wave</li>
-              <li>Orange Money</li>
-              <li>Cash à la livraison</li>
+              {livraison.paymentMethods.map((m) => (
+                <li key={m}>{m}</li>
+              ))}
             </ul>
           </div>
         </div>

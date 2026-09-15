@@ -28,19 +28,19 @@
       "variants": [
         {
           "id": "simple",
-          "label": "1 pâte + 1 brosse offerte",
+          "label": "1 Dentifrice Siwakare + 1 brosse à dents offerte",
           "price": 3000,
           "image": "/images/dentifrice-siwak.jpg"
         },
         {
           "id": "duo",
-          "label": "2 achetées = 3ème offerte (3 pâtes + 2 brosses)",
+          "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 pâtes Siwakare + 3 brosses à dents)",
           "price": 6000,
           "image": "/images/dentifrice-siwak.jpg"
         },
         {
           "id": "trio",
-          "label": "3 achetées = 2 offertes (5 pâtes + 3 brosses)",
+          "label": "3 Siwakare achetées = 2 offertes (5 pâtes Siwakare + 5 brosses à dents)",
           "price": 9000,
           "image": "/images/dentifrice-siwak.jpg"
         }
@@ -52,11 +52,11 @@
         },
         {
           "q": "La brosse à dents offerte est-elle incluse à chaque fois ?",
-          "a": "Oui, une brosse à dents est offerte pour chaque pâte achetée, y compris dans les offres groupées."
+          "a": "Oui, une brosse à dents est offerte pour chaque pâte reçue, y compris dans les offres groupées."
         },
         {
           "q": "Les offres groupées incluent-elles une brosse par pâte ?",
-          "a": "Une brosse à dents est offerte par pâte achetée — les pâtes offertes en bonus n'incluent pas de brosse supplémentaire."
+          "a": "Oui, le nombre de brosses offertes correspond toujours au nombre total de pâtes reçues — offertes comprises, pas seulement celles achetées."
         },
         {
           "q": "Convient-elle aux enfants ?",
@@ -100,5 +100,57 @@
         }
       ]
     }
-  ]
+  ],
+  "testimonials": [
+    {
+      "stars": 5,
+      "text": "Haleine fraîche toute la journée et je sais que je suis dans la sunna. L'offre 3 pâtes achetées, 2 offertes couvre toute la maison.",
+      "author": "Aïssatou, Dakar"
+    },
+    {
+      "stars": 5,
+      "text": "Livraison rapide, paiement à la livraison, ça m'a rassuré pour ma première commande.",
+      "author": "Modou, Thiès"
+    },
+    {
+      "stars": 5,
+      "text": "On m'avait parlé du siwak depuis longtemps, Siwakare m'a permis de m'y mettre facilement.",
+      "author": "Fatou, Saly"
+    }
+  ],
+  "leSiwak": {
+    "origin": "Le siwak (ou miswak) est une racine issue de l'arbuste Salvadora persica, utilisée depuis des siècles comme brosse à dents naturelle, notamment dans les cultures musulmanes et à travers plusieurs régions d'Afrique et d'Asie.",
+    "benefits": [
+      "Nettoyage efficace des dents et des espaces interdentaires",
+      "Haleine fraîche",
+      "Action bénéfique pour les gencives",
+      "Propriétés antibactériennes naturelles",
+      "Alternative 100% naturelle, biodégradable et sans plastique"
+    ],
+    "image1": "/images/siwak-batons.jpg",
+    "propheticIntro": "Le siwak occupe une place particulière dans la tradition prophétique (sunna). Le Prophète Muhammad (paix et bénédictions sur lui) l'utilisait régulièrement : au réveil, avant les prières, avant de réciter le Coran, et en entrant chez lui.",
+    "quotes": [
+      {
+        "text": "Le siwak est une purification pour la bouche et une manière de chercher la satisfaction d'Allah.",
+        "source": "Rapporté par Ahmad, An-Nassa'i, Al-Bukhari, Muslim"
+      },
+      {
+        "text": "Si je ne craignais pas de surcharger ma communauté, je leur aurais ordonné d'utiliser le siwak à chaque prière.",
+        "source": "Al-Bukhari, Muslim, Ad-Darimi"
+      }
+    ],
+    "propheticOutro": "Utiliser le siwak, c'est donc allier une routine d'hygiène efficace et une pratique de la sunna, dans un geste simple, économique et écologique.",
+    "image2": "/images/brosse-siwakare.jpg"
+  },
+  "livraison": {
+    "zones": [
+      "Dakar et banlieue : livraison sous 24 à 48h",
+      "Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours",
+      "Autres localités : sur demande, contacte-nous sur WhatsApp"
+    ],
+    "paymentMethods": ["Wave", "Orange Money", "Cash à la livraison"]
+  },
+  "contact": {
+    "intro": "Le moyen le plus rapide de commander ou poser une question."
+  }
 }
