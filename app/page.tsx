@@ -19,7 +19,12 @@ export default async function Home() {
             <p className="lead">{hero.subtitle}</p>
             <div className="btn-row">
               <Link href="/produits" className="btn btn-primary">Voir nos produits</Link>
-              <WhatsAppCTA message="Salam, je souhaite commander un produit Siwakare." className="btn btn-whatsapp">
+              <WhatsAppCTA
+                message="Salam, je souhaite commander un produit Siwakare."
+                className="btn btn-whatsapp"
+                event="InitiateCheckout"
+                contentName="Commande générale Siwakare"
+              >
                 Commander sur WhatsApp
               </WhatsAppCTA>
             </div>
@@ -179,7 +184,12 @@ export default async function Home() {
             <Link href="/produits" className="btn btn-primary" style={{ background: "#fff", color: "var(--green-dark)" }}>
               Voir les produits
             </Link>
-            <WhatsAppCTA message="Salam, je souhaite commander un produit Siwakare." className="btn btn-whatsapp">
+            <WhatsAppCTA
+              message="Salam, je souhaite commander un produit Siwakare."
+              className="btn btn-whatsapp"
+              event="InitiateCheckout"
+              contentName="Commande générale Siwakare"
+            >
               Commander sur WhatsApp
             </WhatsAppCTA>
           </div>

@@ -53,7 +53,11 @@ export function Footer() {
         </div>
         <div>
           <h4>Commander</h4>
-          <WhatsAppCTA message="Salam, je veux commander un produit Siwakare.">
+          <WhatsAppCTA
+            message="Salam, je veux commander un produit Siwakare."
+            event="InitiateCheckout"
+            contentName="Commande générale Siwakare"
+          >
             Commander sur WhatsApp
           </WhatsAppCTA>
           <p>Paiement : Wave, Orange Money, cash à la livraison</p>

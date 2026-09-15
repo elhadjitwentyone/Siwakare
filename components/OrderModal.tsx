@@ -43,7 +43,12 @@ export function OrderModal({
         </button>
         <h3 id="order-modal-title">Finalise ta commande</h3>
         <p className="modal-summary">
-          {productLabel} — <strong>{price.toLocaleString("fr-FR")} FCFA</strong>
+          {productLabel}
+          {price > 0 && (
+            <>
+              {" "}— <strong>{price.toLocaleString("fr-FR")} FCFA</strong>
+            </>
+          )}
         </p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="order-name">Prénom et nom</label>
