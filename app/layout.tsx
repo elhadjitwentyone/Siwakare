@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header, Footer, WhatsAppFloating } from "@/components/ui";
+import { PromoBar } from "@/components/PromoBar";
 import { Analytics } from "@/components/Analytics";
 import { UtmCapture } from "@/components/UtmCapture";
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Analytics />
         <UtmCapture />
+        <PromoBar />
         <Header />
         {children}
         <Footer />

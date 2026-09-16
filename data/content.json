@@ -31,7 +31,7 @@
           "label": "1 Dentifrice Siwakare + 1 brosse à dents offerte",
           "price": 3000,
           "image": "/images/1789476488621-5.jpeg",
-          "oldPrice": 0
+          "oldPrice": null
         },
         {
           "id": "duo",
@@ -83,6 +83,22 @@
         "Format traditionnel, à l'état brut, sans transformation",
         "Le choix des puristes de la sunna",
         "Le prix d'entrée le plus accessible pour découvrir le vrai siwak"
+      ],
+      "variants": [
+        {
+          "id": "simple",
+          "label": "1 Bâton Siwak",
+          "price": 1000,
+          "oldPrice": 1500,
+          "image": "/images/1789483948132-siwak1.webp"
+        },
+        {
+          "id": "lot5",
+          "label": "Lot de 5 Siwak",
+          "price": 3000,
+          "oldPrice": 5000,
+          "image": "/images/1789483948132-siwak1.webp"
+        }
       ],
       "faq": [
         {

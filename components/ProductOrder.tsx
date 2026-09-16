@@ -70,7 +70,7 @@ export function ProductOrder({
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}>
-              {activeOldPrice && <span className="old-price">{activeOldPrice.toLocaleString("fr-FR")} FCFA</span>}
+              {activeOldPrice ? <span className="old-price">{activeOldPrice.toLocaleString("fr-FR")} FCFA</span> : null}
               <PriceTag fcfa={activePrice} />
             </div>
           )}

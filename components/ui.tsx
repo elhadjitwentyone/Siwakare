@@ -95,7 +95,7 @@ export function ProductCard({ p, ctaLabel }: { p: Product; ctaLabel: string }) {
             <li key={v.id}>
               <span>{v.label}</span>
               <span className="card-variant-price">
-                {v.oldPrice && <span className="old-price">{v.oldPrice.toLocaleString("fr-FR")} FCFA</span>}
+                {v.oldPrice ? <span className="old-price">{v.oldPrice.toLocaleString("fr-FR")} FCFA</span> : null}
                 {v.price.toLocaleString("fr-FR")} FCFA
               </span>
             </li>
