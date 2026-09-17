@@ -56,7 +56,7 @@ export function Footer() {
           <WhatsAppCTA
             message="Salam, je veux commander un produit Siwakare."
             event="InitiateCheckout"
-            contentName="Commande générale Siwakare"
+            pickProduct
           >
             Commander
           </WhatsAppCTA>

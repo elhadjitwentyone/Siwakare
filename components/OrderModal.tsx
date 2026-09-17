@@ -4,26 +4,35 @@ import { useEffect, useState } from "react";
 import { WHATSAPP_NUMBER } from "@/components/ui";
 
 export type LeadInfo = { name: string; address: string; phone: string };
+export type OrderedItem = { label: string; price: number };
+type BundleOption = { key: string; label: string; price: number };
 
-// S'affiche sur tout bouton de commande. Récupère prénom/nom, adresse et
-// téléphone, puis envoie la commande directement à /api/order (sauvegarde +
-// notification Telegram côté serveur) — le client n'a plus besoin de passer
-// par WhatsApp pour que la commande soit reçue.
+// S'affiche sur tout bouton de commande. Quand aucun produit n'est déjà fixé
+// (pickProduct=true, cas des CTA génériques : hero, footer, bande du bas),
+// le client choisit d'abord un bundle parmi le catalogue avant de renseigner
+// ses coordonnées. Récupère ensuite prénom/nom, adresse et téléphone, puis
+// envoie la commande directement à /api/order (sauvegarde + notification
+// email côté serveur) — le client n'a plus besoin de passer par WhatsApp
+// pour que la commande soit reçue.
 export function OrderModal({
   productLabel,
   price,
+  pickProduct = false,
   onClose,
   onSuccess,
 }: {
   productLabel: string;
   price: number;
+  pickProduct?: boolean;
   onClose: () => void;
-  onSuccess?: (lead: LeadInfo) => void;
+  onSuccess?: (lead: LeadInfo, order: OrderedItem) => void;
 }) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [bundles, setBundles] = useState<BundleOption[] | null>(null);
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -33,19 +42,51 @@ export function OrderModal({
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
+  useEffect(() => {
+    if (!pickProduct) return;
+    let cancelled = false;
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data: { products?: { slug: string; name: string; price: number; variants: { id: string; label: string; price: number }[] }[] }) => {
+        if (cancelled) return;
+        const opts: BundleOption[] = [];
+        for (const p of data.products ?? []) {
+          if (p.variants.length > 0) {
+            for (const v of p.variants) {
+              opts.push({ key: `${p.slug}:${v.id}`, label: `${p.name} — ${v.label}`, price: v.price });
+            }
+          } else {
+            opts.push({ key: p.slug, label: p.name, price: p.price });
+          }
+        }
+        setBundles(opts);
+      })
+      .catch(() => !cancelled && setBundles([]));
+    return () => {
+      cancelled = true;
+    };
+  }, [pickProduct]);
+
+  const selectedBundle = bundles?.find((b) => b.key === selectedKey);
+  const effectiveLabel = pickProduct ? selectedBundle?.label ?? "" : productLabel;
+  const effectivePrice = pickProduct ? selectedBundle?.price ?? 0 : price;
+  const canSubmit = pickProduct ? !!selectedBundle : true;
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!canSubmit) return;
     setStatus("submitting");
     const lead: LeadInfo = { name, address, phone };
+    const order: OrderedItem = { label: effectiveLabel, price: effectivePrice };
     try {
       const res = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: productLabel, price, ...lead }),
+        body: JSON.stringify({ product: order.label, price: order.price, ...lead }),
       });
       if (!res.ok) throw new Error("request failed");
       setStatus("success");
-      onSuccess?.(lead);
+      onSuccess?.(lead, order);
     } catch {
       setStatus("error");
     }
@@ -58,7 +99,7 @@ export function OrderModal({
           <button type="button" className="modal-close" onClick={onClose} aria-label="Fermer">×</button>
           <h3>Commande reçue ✅</h3>
           <p className="modal-summary">
-            Merci {name} ! On te contacte très vite au {phone} pour confirmer la livraison à {address}.
+            Merci {name} ! On te contacte très vite au {phone} pour confirmer « {effectiveLabel} » et la livraison à {address}.
           </p>
           <button type="button" className="btn btn-primary" style={{ width: "100%" }} onClick={onClose}>
             Fermer
@@ -75,14 +116,40 @@ export function OrderModal({
           ×
         </button>
         <h3 id="order-modal-title">Finalise ta commande</h3>
-        <p className="modal-summary">
-          {productLabel}
-          {price > 0 && (
-            <>
-              {" "}— <strong>{price.toLocaleString("fr-FR")} FCFA</strong>
-            </>
-          )}
-        </p>
+
+        {pickProduct ? (
+          <div style={{ marginBottom: 18 }}>
+            <label style={{ display: "block", marginBottom: 10 }}>Quel produit veux-tu commander ?</label>
+            {bundles === null && <p className="modal-summary">Chargement des produits...</p>}
+            {bundles?.length === 0 && <p className="modal-summary">Aucun produit disponible pour le moment.</p>}
+            {bundles && bundles.length > 0 && (
+              <div className="variant-picker">
+                {bundles.map((b) => (
+                  <button
+                    key={b.key}
+                    type="button"
+                    className={`variant-option ${b.key === selectedKey ? "selected" : ""}`}
+                    onClick={() => setSelectedKey(b.key)}
+                    aria-pressed={b.key === selectedKey}
+                  >
+                    <span className="variant-label">{b.label}</span>
+                    <span className="variant-price">{b.price.toLocaleString("fr-FR")} FCFA</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <p className="modal-summary">
+            {productLabel}
+            {price > 0 && (
+              <>
+                {" "}— <strong>{price.toLocaleString("fr-FR")} FCFA</strong>
+              </>
+            )}
+          </p>
+        )}
+
         <form onSubmit={handleSubmit}>
           <label htmlFor="order-name">Prénom et nom</label>
           <input
@@ -115,7 +182,12 @@ export function OrderModal({
               <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank">WhatsApp</a>.
             </p>
           )}
-          <button type="submit" className="btn btn-whatsapp" style={{ width: "100%", marginTop: 16 }} disabled={status === "submitting"}>
+          <button
+            type="submit"
+            className="btn btn-whatsapp"
+            style={{ width: "100%", marginTop: 16 }}
+            disabled={status === "submitting" || !canSubmit}
+          >
             {status === "submitting" ? "Envoi..." : "Valider ma commande"}
           </button>
         </form>

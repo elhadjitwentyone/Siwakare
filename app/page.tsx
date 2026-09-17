@@ -23,7 +23,7 @@ export default async function Home() {
                 message="Salam, je souhaite commander un produit Siwakare."
                 className="btn btn-whatsapp"
                 event="InitiateCheckout"
-                contentName="Commande générale Siwakare"
+                pickProduct
               >
                 Commander
               </WhatsAppCTA>
@@ -188,7 +188,7 @@ export default async function Home() {
               message="Salam, je souhaite commander un produit Siwakare."
               className="btn btn-whatsapp"
               event="InitiateCheckout"
-              contentName="Commande générale Siwakare"
+              pickProduct
             >
               Commander
             </WhatsAppCTA>
