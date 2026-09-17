@@ -1,3 +1,13 @@
 {
-  "orders": []
+  "orders": [
+    {
+      "id": "1789668786977",
+      "date": "2026-09-17T18:13:06.977Z",
+      "product": "Pâte Dentifrice Siwakare — 1 Dentifrice Siwakare + 1 brosse à dents offerte",
+      "price": 2000,
+      "name": "test",
+      "address": "Sacré-Coeur 3, Dakar",
+      "phone": "752543336"
+    }
+  ]
 }
