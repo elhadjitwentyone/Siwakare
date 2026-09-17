@@ -11,7 +11,7 @@
       "name": "Pâte Dentifrice Siwakare",
       "tagline": "Le siwak sous une forme pratique pour un usage quotidien — avec une brosse à dents offerte.",
       "price": 2000,
-      "oldPrice": null,
+      "oldPrice": 3000,
       "featured": true,
       "freeGift": "1 brosse à dents offerte",
       "image": "/images/1789476168239-rmvbg-siwakare.png",
@@ -31,21 +31,21 @@
           "label": "1 Dentifrice Siwakare + 1 brosse à dents offerte",
           "price": 2000,
           "image": "/images/1789476488621-5.jpeg",
-          "oldPrice": null
+          "oldPrice": 3000
         },
         {
           "id": "duo",
           "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 Dentifrices Siwakare + 3 brosses à dents)",
           "price": 4000,
           "image": "/images/1789476619997-5.jpeg",
-          "oldPrice": 6000
+          "oldPrice": 9000
         },
         {
           "id": "trio",
           "label": "3 Dentifrices Siwakare achetées = 2 offertes (5 Dentifrices Siwakare + 5 brosses à dents)",
           "price": 6000,
           "image": "/images/1789476629268-6.jpeg",
-          "oldPrice": 10000
+          "oldPrice": 15000
         }
       ],
       "faq": [
