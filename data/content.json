@@ -10,7 +10,7 @@
       "slug": "pate-dentifrice-siwakare",
       "name": "Pâte Dentifrice Siwakare",
       "tagline": "Le siwak sous une forme pratique pour un usage quotidien — avec une brosse à dents offerte.",
-      "price": 3000,
+      "price": 2000,
       "oldPrice": null,
       "featured": true,
       "freeGift": "1 brosse à dents offerte",
@@ -29,23 +29,23 @@
         {
           "id": "simple",
           "label": "1 Dentifrice Siwakare + 1 brosse à dents offerte",
-          "price": 3000,
+          "price": 2000,
           "image": "/images/1789476488621-5.jpeg",
           "oldPrice": null
         },
         {
           "id": "duo",
           "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 Dentifrices Siwakare + 3 brosses à dents)",
-          "price": 6000,
+          "price": 4000,
           "image": "/images/1789476619997-5.jpeg",
-          "oldPrice": 9000
+          "oldPrice": 6000
         },
         {
           "id": "trio",
           "label": "3 Dentifrices Siwakare achetées = 2 offertes (5 Dentifrices Siwakare + 5 brosses à dents)",
-          "price": 9000,
+          "price": 6000,
           "image": "/images/1789476629268-6.jpeg",
-          "oldPrice": 15000
+          "oldPrice": 10000
         }
       ],
       "faq": [
@@ -163,8 +163,7 @@
   },
   "livraison": {
     "zones": [
-      "1000 FCFA",
-      "Dakar et banlieue : livraison sous 24 à 48h",
+      "Dakar et banlieue : 1000 FCFA, livraison sous 24 à 48h",
       "Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours",
       "Autres localités : sur demande, contacte-nous sur WhatsApp"
     ],
