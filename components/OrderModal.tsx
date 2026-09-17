@@ -1,26 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { WHATSAPP_NUMBER } from "@/components/ui";
 
 export type LeadInfo = { name: string; address: string; phone: string };
 
-// S'affiche juste avant l'ouverture de WhatsApp sur tout bouton de commande.
-// Sert à récupérer prénom/nom, adresse et téléphone du client avant qu'il
-// ne parte sur WhatsApp — ces infos sont ensuite ajoutées au message envoyé.
+// S'affiche sur tout bouton de commande. Récupère prénom/nom, adresse et
+// téléphone, puis envoie la commande directement à /api/order (sauvegarde +
+// notification Telegram côté serveur) — le client n'a plus besoin de passer
+// par WhatsApp pour que la commande soit reçue.
 export function OrderModal({
   productLabel,
   price,
   onClose,
-  onSubmit,
+  onSuccess,
 }: {
   productLabel: string;
   price: number;
   onClose: () => void;
-  onSubmit: (lead: LeadInfo) => void;
+  onSuccess?: (lead: LeadInfo) => void;
 }) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -30,9 +33,39 @@ export function OrderModal({
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    onSubmit({ name, address, phone });
+    setStatus("submitting");
+    const lead: LeadInfo = { name, address, phone };
+    try {
+      const res = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product: productLabel, price, ...lead }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setStatus("success");
+      onSuccess?.(lead);
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <div className="modal-backdrop" onClick={onClose}>
+        <div className="modal-card" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+          <button type="button" className="modal-close" onClick={onClose} aria-label="Fermer">×</button>
+          <h3>Commande reçue ✅</h3>
+          <p className="modal-summary">
+            Merci {name} ! On te contacte très vite au {phone} pour confirmer la livraison à {address}.
+          </p>
+          <button type="button" className="btn btn-primary" style={{ width: "100%" }} onClick={onClose}>
+            Fermer
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -76,8 +109,14 @@ export function OrderModal({
             onChange={(e) => setPhone(e.target.value)}
             placeholder="77 000 00 00"
           />
-          <button type="submit" className="btn btn-whatsapp" style={{ width: "100%", marginTop: 16 }}>
-            Valider et continuer sur WhatsApp
+          {status === "error" && (
+            <p className="modal-error">
+              La commande n'a pas pu être envoyée. Réessaie, ou écris-nous directement sur{" "}
+              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank">WhatsApp</a>.
+            </p>
+          )}
+          <button type="submit" className="btn btn-whatsapp" style={{ width: "100%", marginTop: 16 }} disabled={status === "submitting"}>
+            {status === "submitting" ? "Envoi..." : "Valider ma commande"}
           </button>
         </form>
       </div>

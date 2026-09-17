@@ -88,7 +88,7 @@ export function ProductOrder({
                 contentName={contentName}
                 value={activePrice}
               >
-                Commander sur WhatsApp
+                Commander
               </WhatsAppCTA>
             )}
             <Link href="/livraison-paiement" className="btn btn-outline">

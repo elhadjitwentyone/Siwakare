@@ -58,7 +58,7 @@ export function Footer() {
             event="InitiateCheckout"
             contentName="Commande générale Siwakare"
           >
-            Commander sur WhatsApp
+            Commander
           </WhatsAppCTA>
           <p>Paiement : Wave, Orange Money, cash à la livraison</p>
         </div>

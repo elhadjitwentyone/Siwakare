@@ -25,7 +25,7 @@ export default async function Home() {
                 event="InitiateCheckout"
                 contentName="Commande générale Siwakare"
               >
-                Commander sur WhatsApp
+                Commander
               </WhatsAppCTA>
             </div>
             <div className="badges">
@@ -61,7 +61,7 @@ export default async function Home() {
               <p>Le Prophète (paix et bénédictions sur lui) utilisait le siwak au réveil, avant les prières et avant de réciter le Coran.</p>
             </div></Reveal>
             <Reveal delay={200}><div className="card">
-              <span className="icon">🪙</span>
+              <span className="icon">💵</span>
               <h3>Économique</h3>
               <p>Un bâton dure plusieurs semaines. Moins de dépenses en brosses en plastique — les offres groupées sur la pâte dentifrice couvrent toute la maison.</p>
             </div></Reveal>
@@ -179,7 +179,7 @@ export default async function Home() {
       <section className="cta-band">
         <div className="container">
           <h2>Envie de tester le siwak ?</h2>
-          <p>Commande ton produit en quelques minutes, par le site ou directement sur WhatsApp.</p>
+          <p>Commande ton produit en quelques minutes directement sur le site.</p>
           <div className="btn-row" style={{ justifyContent: "center" }}>
             <Link href="/produits" className="btn btn-primary" style={{ background: "#fff", color: "var(--green-dark)" }}>
               Voir les produits
@@ -190,7 +190,7 @@ export default async function Home() {
               event="InitiateCheckout"
               contentName="Commande générale Siwakare"
             >
-              Commander sur WhatsApp
+              Commander
             </WhatsAppCTA>
           </div>
         </div>

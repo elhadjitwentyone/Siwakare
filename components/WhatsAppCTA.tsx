@@ -5,19 +5,16 @@ import { waLink } from "@/components/ui";
 import { getStoredUtm, trackEvent, utmSourceTag, TrackEventName } from "@/lib/tracking";
 import { OrderModal, LeadInfo } from "@/components/OrderModal";
 
-function appendLead(message: string, lead: LeadInfo) {
-  return `${message}\n\nPrénom et nom : ${lead.name}\nAdresse : ${lead.address}\nTéléphone : ${lead.phone}`;
-}
-
 // Remplace les anciens <a href={waLink(...)}> écrits en dur partout dans le
-// site. Fait trois choses de plus qu'un lien simple :
+// site. Fait deux choses de plus qu'un lien simple :
 //  1. tague le message WhatsApp avec la source de la campagne (UTM/fbclid)
 //     pour pouvoir attribuer une vente manuellement,
-//  2. déclenche un événement Meta Pixel + GA4 au clic,
-//  3. pour une commande (event="InitiateCheckout"), ouvre d'abord un
-//     formulaire (nom, adresse, téléphone) avant de partir sur WhatsApp —
-//     ces infos sont ajoutées au message. Les autres CTA (contact, question)
-//     restent des liens directs, sans ce détour.
+//  2. déclenche un événement Meta Pixel + GA4 au clic.
+// Pour une commande (event="InitiateCheckout"), le bouton n'ouvre plus
+// WhatsApp : il affiche le formulaire de commande (OrderModal), qui envoie
+// directement la commande au serveur (sauvegarde + notification Telegram),
+// sans dépendre du client pour l'envoi d'un message WhatsApp. Les autres CTA
+// (contact, question) restent des liens WhatsApp directs, sans ce détour.
 export function WhatsAppCTA({
   message,
   children,
@@ -64,11 +61,7 @@ export function WhatsAppCTA({
             productLabel={contentName || "ta commande"}
             price={value ?? 0}
             onClose={() => setShowModal(false)}
-            onSubmit={(lead) => {
-              track(lead);
-              window.open(waLink(appendLead(finalMessage, lead)), "_blank");
-              setShowModal(false);
-            }}
+            onSuccess={(lead) => track(lead)}
           />
         )}
       </>
