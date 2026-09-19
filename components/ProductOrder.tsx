@@ -2,14 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { PriceTag } from "@/components/PriceTag";
 import { TrackViewContent } from "@/components/TrackViewContent";
 import type { Variant } from "@/lib/content";
 
-// Regroupe image, prix, sélecteur de variantes et bouton de commande dans un
-// seul bloc client : choisir une variante doit changer le prix ET l'image
-// affichés, donc les trois doivent partager le même état.
 export function ProductOrder({
   name,
   tagline,
@@ -35,10 +31,6 @@ export function ProductOrder({
   const activePrice = selected?.price ?? price;
   const activeOldPrice = selected?.oldPrice ?? oldPrice;
   const activeImage = selected?.image ?? image;
-  const contentName = selected ? `${name} — ${selected.label}` : name;
-  const orderMsg = selected
-    ? `Salam, je souhaite commander : ${name} — ${selected.label} (${activePrice.toLocaleString("fr-FR")} FCFA).`
-    : `Salam, je souhaite commander le ${name} (${activePrice.toLocaleString("fr-FR")} FCFA).`;
 
   return (
     <>
@@ -80,23 +72,13 @@ export function ProductOrder({
           <div className="btn-row" style={{ marginTop: 24 }}>
             {outOfStock ? (
               <span className="btn btn-disabled" aria-disabled="true">Rupture de stock</span>
-            ) : (
-              <WhatsAppCTA
-                message={orderMsg}
-                className="btn btn-whatsapp"
-                event="InitiateCheckout"
-                contentName={contentName}
-                value={activePrice}
-              >
-                Commander
-              </WhatsAppCTA>
-            )}
+            ) : null}
             <Link href="/livraison-paiement" className="btn btn-outline">
               Livraison & paiement
             </Link>
           </div>
           {outOfStock ? (
-            <p className="reassurance">📦 En rupture de stock — le réassort est en cours, écris-nous sur WhatsApp pour être prévenu(e).</p>
+            <p className="reassurance">📦 En rupture de stock — le réassort est en cours.</p>
           ) : (
             <p className="reassurance">🔒 Satisfait ou remboursé sous 7 à 15 jours pour ta première commande • Paiement à la livraison, Wave ou Orange Money</p>
           )}
@@ -105,24 +87,6 @@ export function ProductOrder({
           {activeImage ? <img src={activeImage} alt={name} /> : "🌿"}
         </div>
       </div>
-
-      {!outOfStock && (
-        <div className="sticky-cta">
-          <div className="sticky-cta-info">
-            <strong>{contentName}</strong>
-            <PriceTag fcfa={activePrice} />
-          </div>
-          <WhatsAppCTA
-            message={orderMsg}
-            className="btn btn-whatsapp"
-            event="InitiateCheckout"
-            contentName={contentName}
-            value={activePrice}
-          >
-            Commander
-          </WhatsAppCTA>
-        </div>
-      )}
     </>
   );
 }
