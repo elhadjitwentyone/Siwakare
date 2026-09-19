@@ -1,14 +1,7 @@
 import Link from "next/link";
-import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { ProductOrder } from "@/components/ProductOrder";
 import { PriceTag } from "@/components/PriceTag";
 import type { Product, Variant } from "@/lib/content";
-
-export const WHATSAPP_NUMBER = "221779978756"; // à remplacer par le numéro dédié Siwakare
-
-export function waLink(message: string) {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
 
 export function Header() {
   return (
@@ -23,12 +16,6 @@ export function Header() {
           <Link href="/livraison-paiement">Livraison & paiement</Link>
           <Link href="/contact">Contact</Link>
         </nav>
-        <WhatsAppCTA
-          className="btn btn-whatsapp header-cta"
-          message="Salam, je souhaite avoir plus d'infos sur les produits Siwakare."
-        >
-          WhatsApp
-        </WhatsAppCTA>
       </div>
     </header>
   );
@@ -53,29 +40,12 @@ export function Footer() {
         </div>
         <div>
           <h4>Commander</h4>
-          <WhatsAppCTA
-            message="Salam, je veux commander un produit Siwakare."
-            event="InitiateCheckout"
-            pickProduct
-          >
-            Commander
-          </WhatsAppCTA>
+          <Link href="/produits" className="btn btn-primary">Voir nos produits</Link>
           <p>Paiement : Wave, Orange Money, cash à la livraison</p>
         </div>
       </div>
       <div className="container copyright">© {new Date().getFullYear()} Siwakare — Dakar, Sénégal</div>
     </footer>
-  );
-}
-
-export function WhatsAppFloating() {
-  return (
-    <WhatsAppCTA
-      className="wa-float"
-      message="Salam, j'ai une question sur Siwakare."
-    >
-      <span aria-label="Contacter sur WhatsApp" role="img">💬</span>
-    </WhatsAppCTA>
   );
 }
 
@@ -137,12 +107,6 @@ export function ProductPage({
   freeGift?: string;
   variants?: Variant[];
 }) {
-  const startVariant = variants?.[0];
-  const bandContentName = startVariant ? `${name} — ${startVariant.label}` : name;
-  const bandPrice = startVariant?.price ?? fcfa;
-  const bandMsg = startVariant
-    ? `Salam, je souhaite commander : ${name} — ${startVariant.label} (${bandPrice.toLocaleString("fr-FR")} FCFA).`
-    : `Salam, je souhaite commander le ${name} (${fcfa.toLocaleString("fr-FR")} FCFA).`;
   return (
     <main>
       <section className="section">
@@ -218,26 +182,6 @@ export function ProductPage({
           </div>
         </div>
       </section>
-
-      {!outOfStock && (
-        <section className="cta-band">
-          <div className="container">
-            <h2>Prêt à commander ton {name} ?</h2>
-            <p>Paiement Wave, Orange Money ou cash à la livraison.</p>
-            <div className="btn-row" style={{ justifyContent: "center" }}>
-              <WhatsAppCTA
-                message={bandMsg}
-                className="btn btn-whatsapp"
-                event="InitiateCheckout"
-                contentName={bandContentName}
-                value={bandPrice}
-              >
-                Commander maintenant
-              </WhatsAppCTA>
-            </div>
-          </div>
-        </section>
-      )}
     </main>
   );
 }
