@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/ui";
-import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { Reveal } from "@/components/Reveal";
 import { getContent } from "@/lib/content";
 
@@ -19,14 +18,6 @@ export default async function Home() {
             <p className="lead">{hero.subtitle}</p>
             <div className="btn-row">
               <Link href="/produits" className="btn btn-primary">Voir nos produits</Link>
-              <WhatsAppCTA
-                message="Salam, je souhaite commander un produit Siwakare."
-                className="btn btn-whatsapp"
-                event="InitiateCheckout"
-                pickProduct
-              >
-                Commander
-              </WhatsAppCTA>
             </div>
             <div className="badges">
               <span className="badge">🌿 100% naturel</span>
@@ -184,14 +175,6 @@ export default async function Home() {
             <Link href="/produits" className="btn btn-primary" style={{ background: "#fff", color: "var(--green-dark)" }}>
               Voir les produits
             </Link>
-            <WhatsAppCTA
-              message="Salam, je souhaite commander un produit Siwakare."
-              className="btn btn-whatsapp"
-              event="InitiateCheckout"
-              pickProduct
-            >
-              Commander
-            </WhatsAppCTA>
           </div>
         </div>
       </section>
