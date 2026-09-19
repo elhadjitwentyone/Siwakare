@@ -1,31 +1,20 @@
-import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { ContactForm } from "@/components/ContactForm";
-import { getContent } from "@/lib/content";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Contact — Siwakare" };
 
 export default async function Contact() {
-  const { contact } = await getContent();
   return (
     <main>
       <section className="page-hero">
         <div className="container">
           <h1>Contact</h1>
-          <p>Écris-nous sur WhatsApp, on te répond rapidement.</p>
+          <p>Écris-nous, on te répond rapidement.</p>
         </div>
       </section>
 
       <section className="section">
-        <div className="container grid-2">
-          <div className="card">
-            <span className="icon">💬</span>
-            <h3>WhatsApp</h3>
-            <p>{contact.intro}</p>
-            <WhatsAppCTA message="Salam, je vous contacte depuis le site Siwakare." className="btn btn-whatsapp">
-              Discuter sur WhatsApp
-            </WhatsAppCTA>
-          </div>
+        <div className="container">
           <div className="card">
             <span className="icon">✉️</span>
             <h3>Formulaire</h3>
