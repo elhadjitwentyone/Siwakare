@@ -5,6 +5,7 @@ export type Order = {
   date: string; // ISO
   product: string;
   price: number;
+  delivery?: string;
   name: string;
   address: string;
   phone: string;

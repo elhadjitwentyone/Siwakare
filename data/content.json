@@ -34,15 +34,15 @@
         },
         {
           "id": "duo",
-          "label": "Pack Découverte — 2 achetées, la 3ème offerte (1 333 FCFA la pâte)",
-          "price": 4000,
+          "label": "Pack Découverte — 2 achetées, la 3ème offerte (1 667 FCFA la pâte)",
+          "price": 5000,
           "image": "/images/1789476619997-5.jpeg",
           "oldPrice": 6000
         },
         {
           "id": "trio",
-          "label": "Pack Essentiel — 3 achetées, 2 offertes (1 200 FCFA la pâte)",
-          "price": 6000,
+          "label": "Pack Essentiel — 3 achetées, 2 offertes (1 500 FCFA la pâte) · livraison offerte à Dakar",
+          "price": 7500,
           "image": "/images/1789476629268-6.jpeg",
           "oldPrice": 10000
         }
@@ -162,7 +162,7 @@
   },
   "livraison": {
     "zones": [
-      "Dakar et banlieue : 1000 FCFA, livraison sous 24 à 48h",
+      "Dakar et banlieue : 1 000 FCFA (offerte dès le Pack Essentiel), livraison sous 24 à 48h",
       "Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours",
       "Autres localités : sur demande, contacte-nous via la page Contact"
     ],

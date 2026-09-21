@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
   const phone = typeof body?.phone === "string" ? body.phone.trim() : "";
   const product = typeof body?.product === "string" && body.product.trim() ? body.product.trim() : "Commande générale Siwakare";
   const price = Number(body?.price) || 0;
+  const delivery = typeof body?.delivery === "string" ? body.delivery.trim().slice(0, 120) : "";
 
   if (!name || !address || !phone) {
     return NextResponse.json({ error: "Nom, adresse et téléphone requis." }, { status: 400 });
@@ -60,6 +61,7 @@ export async function POST(req: NextRequest) {
     date: new Date().toISOString(),
     product,
     price,
+    ...(delivery ? { delivery } : {}),
     name,
     address,
     phone,
@@ -76,6 +78,7 @@ export async function POST(req: NextRequest) {
     `<h2>🛒 Nouvelle commande Siwakare</h2>` +
     `<p><b>Produit :</b> ${escapeHtml(product)}<br/>` +
     (price ? `<b>Prix :</b> ${price.toLocaleString("fr-FR")} FCFA<br/>` : "") +
+    (delivery ? `<b>Livraison :</b> ${escapeHtml(delivery)}<br/>` : "") +
     `<b>Client :</b> ${escapeHtml(name)}<br/>` +
     `<b>Téléphone :</b> ${escapeHtml(phone)}<br/>` +
     `<b>Adresse :</b> ${escapeHtml(address)}</p>`;

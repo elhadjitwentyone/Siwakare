@@ -43,7 +43,7 @@ export default function CGV() {
 
           <h2>5. Livraison</h2>
           <p>
-            Dakar et banlieue : livraison sous 24 à 48 h, frais de {DELIVERY_FEE_DAKAR.toLocaleString("fr-FR")} FCFA.
+            Dakar et banlieue : livraison sous 24 à 48 h, frais de {DELIVERY_FEE_DAKAR.toLocaleString("fr-FR")} FCFA, offerts pour l'achat du Pack Essentiel (5 pâtes + 5 brosses). Ces frais sont indiqués sur le site avant la commande et rappelés lors de la confirmation.
             Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours. Autres localités : sur demande. Les délais
             sont indicatifs. Le client doit être joignable au numéro indiqué ; en cas d'absence répétée, la commande
             peut être annulée.

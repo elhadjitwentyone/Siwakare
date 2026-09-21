@@ -2,12 +2,13 @@
 // Pas de dépendance externe : on parle directement à window.fbq (Meta Pixel)
 // et window.gtag (GA4), posés par components/Analytics.tsx.
 
-export type TrackEventName = "ViewContent" | "Lead" | "InitiateCheckout";
+export type TrackEventName = "ViewContent" | "Lead" | "InitiateCheckout" | "Purchase";
 
 const GA4_EVENT_MAP: Record<TrackEventName, string> = {
   ViewContent: "view_item",
   Lead: "generate_lead",
   InitiateCheckout: "begin_checkout",
+  Purchase: "purchase",
 };
 
 function getCookie(name: string): string | undefined {

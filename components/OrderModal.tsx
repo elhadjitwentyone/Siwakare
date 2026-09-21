@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { DELIVERY_FEE_DAKAR, isFreeDelivery } from "@/lib/legal";
 
 export type LeadInfo = { name: string; address: string; phone: string };
 export type OrderedItem = { label: string; price: number };
@@ -69,6 +70,11 @@ export function OrderModal({
   const effectiveLabel = pickProduct ? selectedBundle?.label ?? "" : productLabel;
   const effectivePrice = pickProduct ? selectedBundle?.price ?? 0 : price;
   const canSubmit = pickProduct ? !!selectedBundle : true;
+  const fmt = (n: number) => n.toLocaleString("fr-FR");
+  const freeDelivery = isFreeDelivery(effectivePrice);
+  const deliveryText = freeDelivery
+    ? "Livraison offerte à Dakar"
+    : `Livraison Dakar : ${fmt(DELIVERY_FEE_DAKAR)} FCFA à payer à la livraison`;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -80,7 +86,7 @@ export function OrderModal({
       const res = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: order.label, price: order.price, ...lead }),
+        body: JSON.stringify({ product: order.label, price: order.price, delivery: deliveryText, ...lead }),
       });
       if (!res.ok) throw new Error("request failed");
       setStatus("success");
@@ -97,7 +103,8 @@ export function OrderModal({
           <button type="button" className="modal-close" onClick={onClose} aria-label="Fermer">×</button>
           <h3>Commande reçue ✅</h3>
           <p className="modal-summary">
-            Merci {name} ! On te contacte très vite au {phone} pour confirmer « {effectiveLabel} » et la livraison à {address}.
+            Merci {name} ! On te contacte très vite au {phone} pour confirmer « {effectiveLabel} » et la livraison à {address}.{" "}
+            {deliveryText}.
           </p>
           <button type="button" className="btn btn-primary" style={{ width: "100%" }} onClick={onClose}>
             Fermer
@@ -143,6 +150,17 @@ export function OrderModal({
             {price > 0 && (
               <>
                 {" "}— <strong>{price.toLocaleString("fr-FR")} FCFA</strong>
+              </>
+            )}
+          </p>
+        )}
+
+        {effectivePrice > 0 && (
+          <p className="modal-delivery">
+            🚚 {deliveryText}
+            {!freeDelivery && (
+              <>
+                {" "}— total à Dakar : <strong>{fmt(effectivePrice + DELIVERY_FEE_DAKAR)} FCFA</strong>
               </>
             )}
           </p>

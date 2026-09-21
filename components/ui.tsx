@@ -3,6 +3,7 @@ import { ProductOrder } from "@/components/ProductOrder";
 import { OrderCTA } from "@/components/OrderCTA";
 import { PriceTag } from "@/components/PriceTag";
 import type { Product, Variant } from "@/lib/content";
+import { isFreeDelivery } from "@/lib/legal";
 
 export function Header() {
   return (
@@ -74,7 +75,10 @@ export function ProductCard({ p, ctaLabel }: { p: Product; ctaLabel: string }) {
         <ul className="card-variant-list">
           {p.variants.map((v) => (
             <li key={v.id}>
-              <span>{v.label}</span>
+              <span>
+                {v.label}
+                {isFreeDelivery(v.price) && <span className="variant-badge">🚚 Livraison offerte</span>}
+              </span>
               <span className="card-variant-price">
                 {v.oldPrice ? <span className="old-price">{v.oldPrice.toLocaleString("fr-FR")} FCFA</span> : null}
                 {v.price.toLocaleString("fr-FR")} FCFA

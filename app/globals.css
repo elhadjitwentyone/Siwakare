@@ -47,7 +47,8 @@ p { margin: 0 0 1em; color: var(--muted); }
   font-variant-numeric: tabular-nums;
 }
 
-.site-header { position: sticky; top: 0; background: var(--cream); border-bottom: 1px solid #e3dcc9; z-index: 20; }
+.top-sticky { position: sticky; top: 0; z-index: 25; }
+.site-header { position: relative; background: var(--cream); border-bottom: 1px solid #e3dcc9; z-index: 20; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; gap: 16px; flex-wrap: wrap; }
 .logo { font-family: Georgia, serif; font-size: 1.4rem; font-weight: bold; color: var(--green-dark); }
 .logo .accent { color: var(--gold); }
@@ -243,3 +244,10 @@ ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--
 .footer-legal a { color: inherit; opacity: .8; }
 .legal h2 { margin-top: 28px; }
 .legal p, .legal li { line-height: 1.65; }
+
+.promo-bar { font-size: .85rem; gap: 6px 14px; padding: 8px 14px; }
+.promo-countdown { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+@media (max-width: 640px) { .promo-bar { font-size: .78rem; padding: 6px 10px; } }
+.variant-badge { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--gold); color: var(--green-dark); font-size: .72rem; font-weight: 700; white-space: nowrap; }
+.delivery-note { font-weight: 600; color: var(--green-dark); margin: 4px 0 0; }
+.modal-delivery { background: var(--green-light); border-radius: 8px; padding: 8px 12px; font-size: .9rem; margin: 0 0 12px; color: var(--green-dark); }

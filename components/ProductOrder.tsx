@@ -6,6 +6,7 @@ import { PriceTag } from "@/components/PriceTag";
 import { OrderCTA } from "@/components/OrderCTA";
 import { TrackViewContent } from "@/components/TrackViewContent";
 import type { Variant } from "@/lib/content";
+import { DELIVERY_FEE_DAKAR, isFreeDelivery } from "@/lib/legal";
 
 export function ProductOrder({
   name,
@@ -26,8 +27,11 @@ export function ProductOrder({
   outOfStock?: boolean;
   variants?: Variant[];
 }) {
-  const [selectedId, setSelectedId] = useState(variants?.[0]?.id);
-  const selected = variants?.find((v) => v.id === selectedId) ?? variants?.[0];
+  // Le pack à livraison offerte (Pack Essentiel) est présélectionné : c'est
+  // celui qui rapporte le plus par commande.
+  const startVariant = variants?.find((v) => isFreeDelivery(v.price)) ?? variants?.[0];
+  const [selectedId, setSelectedId] = useState(startVariant?.id);
+  const selected = variants?.find((v) => v.id === selectedId) ?? startVariant;
 
   const activePrice = selected?.price ?? price;
   const activeOldPrice = selected?.oldPrice ?? oldPrice;
@@ -52,7 +56,10 @@ export function ProductOrder({
                   onClick={() => setSelectedId(v.id)}
                   aria-pressed={v.id === selected?.id}
                 >
-                  <span className="variant-label">{v.label}</span>
+                  <span className="variant-label">
+                    {v.label}
+                    {isFreeDelivery(v.price) && <span className="variant-badge">🚚 Livraison offerte</span>}
+                  </span>
                   <span className="variant-price">
                     {v.oldPrice ? (
                       <span className="old-price">{v.oldPrice.toLocaleString("fr-FR")} FCFA</span>
@@ -70,6 +77,13 @@ export function ProductOrder({
           )}
 
           {freeGift && !variants && <p className="free-gift">🎁 {freeGift}</p>}
+
+          <p className="delivery-note">
+            🚚{" "}
+            {isFreeDelivery(activePrice)
+              ? "Livraison offerte à Dakar"
+              : `Livraison Dakar : ${DELIVERY_FEE_DAKAR.toLocaleString("fr-FR")} FCFA — offerte dès le Pack Essentiel`}
+          </p>
 
           <div className="btn-row" style={{ marginTop: 24 }}>
             {outOfStock ? (

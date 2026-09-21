@@ -18,8 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Analytics />
         <UtmCapture />
-        <PromoBar />
-        <Header />
+        <div className="top-sticky">
+          <PromoBar />
+          <Header />
+        </div>
         {children}
         <Footer />
                 <VercelAnalytics />
