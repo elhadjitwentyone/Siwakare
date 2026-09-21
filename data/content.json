@@ -34,14 +34,14 @@
         },
         {
           "id": "duo",
-          "label": "Pack Découverte — 2 achetées, la 3ème offerte (1 667 FCFA la pâte)",
+          "label": "Pack Découverte — 2 achetées, la 3ème offerte",
           "price": 5000,
           "image": "/images/1789476619997-5.jpeg",
           "oldPrice": 9000
         },
         {
           "id": "trio",
-          "label": "Pack Essentiel — 3 achetées, 2 offertes (1 500 FCFA la pâte) · livraison offerte à Dakar",
+          "label": "Pack Essentiel — 3 achetées, 2 offertes · livraison offerte à Dakar",
           "price": 7500,
           "image": "/images/1789476629268-6.jpeg",
           "oldPrice": 15000
