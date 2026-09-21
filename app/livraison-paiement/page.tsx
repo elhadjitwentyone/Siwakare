@@ -1,4 +1,4 @@
-import { WhatsAppCTA } from "@/components/WhatsAppCTA";
+import Link from "next/link";
 import { getContent } from "@/lib/content";
 
 export const dynamic = "force-dynamic";
@@ -41,13 +41,8 @@ export default async function Livraison() {
       <section className="section section-alt">
         <div className="container" style={{ textAlign: "center" }}>
           <h2>Une question sur ta commande ?</h2>
-          <p>Contacte-nous directement sur WhatsApp pour commander ou suivre ta livraison.</p>
-          <WhatsAppCTA
-            message="Salam, j'ai une question sur la livraison ou le paiement d'une commande Siwakare."
-            className="btn btn-whatsapp"
-          >
-            Écrire sur WhatsApp
-          </WhatsAppCTA>
+          <p>Écris-nous via le formulaire de contact pour suivre ta livraison ou poser une question.</p>
+          <Link href="/contact" className="btn btn-primary">Nous contacter</Link>
         </div>
       </section>
     </main>

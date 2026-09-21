@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { PriceTag } from "@/components/PriceTag";
+import { OrderCTA } from "@/components/OrderCTA";
 import { TrackViewContent } from "@/components/TrackViewContent";
 import type { Variant } from "@/lib/content";
 
@@ -31,6 +32,7 @@ export function ProductOrder({
   const activePrice = selected?.price ?? price;
   const activeOldPrice = selected?.oldPrice ?? oldPrice;
   const activeImage = selected?.image ?? image;
+  const contentName = selected ? `${name} — ${selected.label}` : name;
 
   return (
     <>
@@ -72,7 +74,11 @@ export function ProductOrder({
           <div className="btn-row" style={{ marginTop: 24 }}>
             {outOfStock ? (
               <span className="btn btn-disabled" aria-disabled="true">Rupture de stock</span>
-            ) : null}
+            ) : (
+              <OrderCTA className="btn btn-primary" contentName={contentName} value={activePrice}>
+                Commander
+              </OrderCTA>
+            )}
             <Link href="/livraison-paiement" className="btn btn-outline">
               Livraison & paiement
             </Link>
@@ -80,13 +86,25 @@ export function ProductOrder({
           {outOfStock ? (
             <p className="reassurance">📦 En rupture de stock — le réassort est en cours.</p>
           ) : (
-            <p className="reassurance">🔒 Satisfait ou remboursé sous 7 à 15 jours pour ta première commande • Paiement à la livraison, Wave ou Orange Money</p>
+            <p className="reassurance">🔒 Satisfait ou remboursé sous 7 jours • Paiement à la livraison, Wave ou Orange Money</p>
           )}
         </div>
         <div className="placeholder-img hero-visual">
           {activeImage ? <img src={activeImage} alt={name} /> : "🌿"}
         </div>
       </div>
+
+      {!outOfStock && (
+        <div className="sticky-cta">
+          <div className="sticky-cta-info">
+            <strong>{contentName}</strong>
+            <PriceTag fcfa={activePrice} />
+          </div>
+          <OrderCTA className="btn btn-primary" contentName={contentName} value={activePrice}>
+            Commander
+          </OrderCTA>
+        </div>
+      )}
     </>
   );
 }

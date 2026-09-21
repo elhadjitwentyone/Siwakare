@@ -32,7 +32,6 @@ export type Quote = { text: string; source: string };
 
 export type Content = {
   hero: { title: string; subtitle: string; image: string };
-  whatsapp: string;
   products: Product[];
   testimonials: Testimonial[];
   leSiwak: {

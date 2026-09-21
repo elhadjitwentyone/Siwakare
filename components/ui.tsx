@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProductOrder } from "@/components/ProductOrder";
+import { OrderCTA } from "@/components/OrderCTA";
 import { PriceTag } from "@/components/PriceTag";
 import type { Product, Variant } from "@/lib/content";
 
@@ -16,6 +17,9 @@ export function Header() {
           <Link href="/livraison-paiement">Livraison & paiement</Link>
           <Link href="/contact">Contact</Link>
         </nav>
+        <OrderCTA className="btn btn-primary header-cta" contentName="Commande générale Siwakare" pickProduct>
+          Commander
+        </OrderCTA>
       </div>
     </header>
   );
@@ -40,9 +44,16 @@ export function Footer() {
         </div>
         <div>
           <h4>Commander</h4>
-          <Link href="/produits" className="btn btn-primary">Voir nos produits</Link>
+          <OrderCTA className="btn btn-primary" contentName="Commande générale Siwakare" pickProduct>
+            Commander
+          </OrderCTA>
           <p>Paiement : Wave, Orange Money, cash à la livraison</p>
         </div>
+      </div>
+      <div className="container footer-legal">
+        <Link href="/mentions-legales">Mentions légales</Link>
+        <Link href="/conditions-generales-de-vente">CGV</Link>
+        <Link href="/politique-de-confidentialite">Confidentialité</Link>
       </div>
       <div className="container copyright">© {new Date().getFullYear()} Siwakare — Dakar, Sénégal</div>
     </footer>

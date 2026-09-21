@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WHATSAPP_NUMBER } from "@/components/ui";
 
 export type LeadInfo = { name: string; address: string; phone: string };
 export type OrderedItem = { label: string; price: number };
@@ -12,8 +11,7 @@ type BundleOption = { key: string; label: string; price: number };
 // le client choisit d'abord un bundle parmi le catalogue avant de renseigner
 // ses coordonnées. Récupère ensuite prénom/nom, adresse et téléphone, puis
 // envoie la commande directement à /api/order (sauvegarde + notification
-// email côté serveur) — le client n'a plus besoin de passer par WhatsApp
-// pour que la commande soit reçue.
+// email côté serveur).
 export function OrderModal({
   productLabel,
   price,
@@ -178,13 +176,13 @@ export function OrderModal({
           />
           {status === "error" && (
             <p className="modal-error">
-              La commande n'a pas pu être envoyée. Réessaie, ou écris-nous directement sur{" "}
-              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank">WhatsApp</a>.
+              La commande n'a pas pu être envoyée. Réessaie dans un instant, ou passe par notre{" "}
+              <a href="/contact">page contact</a>.
             </p>
           )}
           <button
             type="submit"
-            className="btn btn-whatsapp"
+            className="btn btn-primary"
             style={{ width: "100%", marginTop: 16 }}
             disabled={status === "submitting" || !canSubmit}
           >

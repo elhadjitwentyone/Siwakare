@@ -190,12 +190,6 @@ export default function AdminPage() {
           value={content.hero.image}
           onChange={(path) => setContent({ ...content, hero: { ...content.hero, image: path } })}
         />
-        <label>Numéro WhatsApp (format international sans +, ex: 221xxxxxxxxx)</label>
-        <input
-          value={content.whatsapp}
-          onChange={(e) => setContent({ ...content, whatsapp: e.target.value })}
-          style={inputStyle}
-        />
       </section>
 
       <section style={{ marginTop: 36, borderTop: "1px solid #eee", paddingTop: 20 }}>
@@ -431,7 +425,7 @@ export default function AdminPage() {
 
       <section style={{ marginTop: 36, borderTop: "1px solid #eee", paddingTop: 20 }}>
         <h2>Page "Contact"</h2>
-        <label>Texte sous "WhatsApp"</label>
+        <label>Texte d'introduction (Contact)</label>
         <textarea
           value={content.contact.intro}
           onChange={(e) => updateContact({ intro: e.target.value })}

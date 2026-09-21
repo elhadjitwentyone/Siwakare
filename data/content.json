@@ -4,7 +4,6 @@
     "subtitle": "Allie hygiène moderne et tradition prophétique. Siwakare t'apporte le siwak et ses produits dérivés, livrés chez toi à Dakar et dans les grandes villes du Sénégal.",
     "image": "/images/1789476182176-bannieremobsiwak.png"
   },
-  "whatsapp": "221779978756",
   "products": [
     {
       "slug": "pate-dentifrice-siwakare",
@@ -28,24 +27,24 @@
       "variants": [
         {
           "id": "simple",
-          "label": "1 Dentifrice Siwakare + 1 brosse à dents offerte",
+          "label": "1 pâte + 1 brosse à dents offerte",
           "price": 2000,
           "image": "/images/1789476488621-5.jpeg",
           "oldPrice": 3000
         },
         {
           "id": "duo",
-          "label": "2 Dentifrices Siwakare achetées = 3ème offerte (3 Dentifrices Siwakare + 3 brosses à dents)",
+          "label": "Pack 3 pâtes + 3 brosses — 2 achetées, la 3ème offerte (1 333 FCFA la pâte)",
           "price": 4000,
           "image": "/images/1789476619997-5.jpeg",
-          "oldPrice": 9000
+          "oldPrice": 6000
         },
         {
           "id": "trio",
-          "label": "3 Dentifrices Siwakare achetées = 2 offertes (5 Dentifrices Siwakare + 5 brosses à dents)",
+          "label": "Pack 5 pâtes + 5 brosses — 3 achetées, 2 offertes (1 200 FCFA la pâte)",
           "price": 6000,
           "image": "/images/1789476629268-6.jpeg",
-          "oldPrice": 15000
+          "oldPrice": 10000
         }
       ],
       "faq": [
@@ -103,7 +102,7 @@
       "faq": [
         {
           "q": "Pourquoi ce produit est-il en rupture de stock ?",
-          "a": "Forte demande sur ce format — le réassort est en cours. Écris-nous sur WhatsApp pour être prévenu dès qu'il revient."
+          "a": "Forte demande sur ce format — le réassort est en cours. Écris-nous via la page Contact pour être prévenu dès qu'il revient."
         },
         {
           "q": "Quelle est la différence avec la Pâte Dentifrice Siwakare ?",
@@ -151,11 +150,11 @@
     "quotes": [
       {
         "text": "Le siwak est une purification pour la bouche et une manière de chercher la satisfaction d'Allah.",
-        "source": "Rapporté par Ahmad, An-Nassa'i, Al-Bukhari, Muslim"
+        "source": "Hadith rapporté par Ahmad et An-Nasâ'î ; cité par Al-Bukhârî (chaîne suspendue)"
       },
       {
         "text": "Si je ne craignais pas de surcharger ma communauté, je leur aurais ordonné d'utiliser le siwak à chaque prière.",
-        "source": "Al-Bukhari, Muslim, Ad-Darimi"
+        "source": "Hadith rapporté par Al-Bukhârî et Muslim"
       }
     ],
     "propheticOutro": "Utiliser le siwak, c'est donc allier une routine d'hygiène efficace et une pratique de la sunna, dans un geste simple, économique et écologique.",
@@ -165,7 +164,7 @@
     "zones": [
       "Dakar et banlieue : 1000 FCFA, livraison sous 24 à 48h",
       "Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours",
-      "Autres localités : sur demande, contacte-nous sur WhatsApp"
+      "Autres localités : sur demande, contacte-nous via la page Contact"
     ],
     "paymentMethods": [
       "Wave",

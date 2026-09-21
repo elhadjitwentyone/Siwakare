@@ -59,8 +59,6 @@ p { margin: 0 0 1em; color: var(--muted); }
 .btn-primary { background: var(--green-dark); color: #fff; }
 .btn-primary:hover { background: var(--green); }
 .btn-outline { border-color: var(--green-dark); color: var(--green-dark); }
-.btn-whatsapp { background: #25D366; color: #fff; }
-.btn-whatsapp:hover { background: #1ebe57; }
 .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
 .hero { padding: 64px 0 48px; text-align: center; background: linear-gradient(180deg, var(--green-light), var(--cream)); }
@@ -123,7 +121,7 @@ p { margin: 0 0 1em; color: var(--muted); }
 .variant-label { font-weight: 600; color: var(--text); font-size: .95rem; flex: 1; min-width: 0; }
 .variant-price { font-weight: 700; color: var(--green-dark); white-space: nowrap; flex-shrink: 0; }
 
-/* Modale de commande (nom, adresse, téléphone) avant l'ouverture de WhatsApp */
+/* Modale de commande (nom, adresse, téléphone) */
 .modal-backdrop {
   position: fixed; inset: 0; background: rgba(35,41,31,.55); z-index: 100;
   display: flex; align-items: center; justify-content: center; padding: 20px;
@@ -178,7 +176,6 @@ ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--
 @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr; } }
 .copyright { border-top: 1px solid rgba(255,255,255,.15); padding-top: 18px; font-size: .8rem; color: #b9c7ba; }
 
-.wa-float { position: fixed; bottom: 22px; right: 22px; background: #25D366; color: #fff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 6px 18px rgba(0,0,0,.2); z-index: 30; }
 
 .breadcrumb { font-size: .85rem; color: var(--muted); margin-bottom: 20px; }
 .page-hero { padding: 40px 0; background: var(--green-light); text-align: center; }
@@ -212,7 +209,6 @@ ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--
 .btn { transition: transform .2s ease, background .2s ease; }
 .btn:hover { transform: translateY(-2px); }
 
-.wa-float { animation: floatY 3s ease-in-out infinite; }
 
 .reassurance { font-size: .85rem; color: var(--muted); margin-top: 14px; }
 
@@ -242,3 +238,8 @@ ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--
   .sticky-cta { display: flex; }
   main { padding-bottom: 72px; }
 }
+
+.footer-legal { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 16px; font-size: .85rem; }
+.footer-legal a { color: inherit; opacity: .8; }
+.legal h2 { margin-top: 28px; }
+.legal p, .legal li { line-height: 1.65; }

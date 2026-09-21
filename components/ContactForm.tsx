@@ -1,61 +1,50 @@
 "use client";
 
 import { useState } from "react";
-import { waLink } from "@/components/ui";
-import { getStoredUtm, trackEvent, utmSourceTag } from "@/lib/tracking";
+import { trackEvent } from "@/lib/tracking";
 
-// Avant : un <form method="get" action={waLink(...)}> — le navigateur
-// écrasait le paramètre "text" avec les champs du formulaire (nom, tel),
-// donc le message WhatsApp arrivait toujours vide de ces infos.
-// Ici on construit le message nous-mêmes, avec tout dedans, et on
-// déclenche un événement Lead avant l'ouverture de WhatsApp.
+const fieldStyle = { padding: 10, borderRadius: 8, border: "1px solid #ece4cf" };
+
+// Envoie le message à /api/contact (notification email via Resend) et
+// déclenche un événement Lead à l'envoi réussi.
 export function ContactForm() {
   const [nom, setNom] = useState("");
   const [tel, setTel] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: nom, phone: tel, message }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      trackEvent("Lead", { content_name: "formulaire_contact" }, { phone: tel });
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
+  }
 
-    const parts = [
-      "Salam, voici mon message :",
-      message && `"${message}"`,
-      nom && `Nom : ${nom}`,
-      tel && `Téléphone : ${tel}`,
-    ].filter(Boolean);
-
-    const finalMessage = parts.join("\n") + utmSourceTag(getStoredUtm());
-
-    trackEvent("Lead", { content_name: "formulaire_contact" });
-
-    window.open(waLink(finalMessage), "_blank");
+  if (status === "success") {
+    return <p className="modal-summary">Merci {nom} ! Ton message est bien reçu, on te répond au plus vite.</p>;
   }
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-      <input
-        name="nom"
-        placeholder="Ton nom"
-        value={nom}
-        onChange={(e) => setNom(e.target.value)}
-        style={{ padding: 10, borderRadius: 8, border: "1px solid #ece4cf" }}
-      />
-      <input
-        name="tel"
-        placeholder="Ton téléphone"
-        value={tel}
-        onChange={(e) => setTel(e.target.value)}
-        style={{ padding: 10, borderRadius: 8, border: "1px solid #ece4cf" }}
-      />
-      <textarea
-        name="message"
-        placeholder="Ton message"
-        rows={4}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        style={{ padding: 10, borderRadius: 8, border: "1px solid #ece4cf" }}
-      />
-      <button type="submit" className="btn btn-primary">Envoyer via WhatsApp</button>
+      <input name="nom" placeholder="Ton nom" required value={nom} onChange={(e) => setNom(e.target.value)} style={fieldStyle} />
+      <input name="tel" type="tel" placeholder="Ton téléphone" required value={tel} onChange={(e) => setTel(e.target.value)} style={fieldStyle} />
+      <textarea name="message" placeholder="Ton message" rows={4} required value={message} onChange={(e) => setMessage(e.target.value)} style={fieldStyle} />
+      {status === "error" && (
+        <p className="modal-error">Le message n'a pas pu être envoyé. Réessaie dans un instant.</p>
+      )}
+      <button type="submit" className="btn btn-primary" disabled={status === "submitting"}>
+        {status === "submitting" ? "Envoi..." : "Envoyer"}
+      </button>
     </form>
   );
 }

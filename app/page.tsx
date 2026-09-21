@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/ui";
+import { OrderCTA } from "@/components/OrderCTA";
 import { Reveal } from "@/components/Reveal";
 import { getContent } from "@/lib/content";
 
@@ -17,7 +18,10 @@ export default async function Home() {
             <h1>{hero.title}</h1>
             <p className="lead">{hero.subtitle}</p>
             <div className="btn-row">
-              <Link href="/produits" className="btn btn-primary">Voir nos produits</Link>
+              <OrderCTA className="btn btn-primary" contentName="Commande générale Siwakare" pickProduct>
+                Commander
+              </OrderCTA>
+              <Link href="/produits" className="btn btn-outline">Voir nos produits</Link>
             </div>
             <div className="badges">
               <span className="badge">🌿 100% naturel</span>
@@ -60,7 +64,7 @@ export default async function Home() {
           <Reveal>
             <div className="quote">
               « Le siwak est une purification pour la bouche et une manière de chercher la satisfaction d'Allah. »
-              <cite>Rapporté par Ahmad, An-Nassa'i, Al-Bukhari, Muslim</cite>
+              <cite>Hadith rapporté par Ahmad et An-Nasâ'î ; cité par Al-Bukhârî (chaîne suspendue)</cite>
             </div>
           </Reveal>
         </div>
@@ -158,7 +162,7 @@ export default async function Home() {
             <div className="card">
               <span className="icon">🔄</span>
               <h3>Satisfait ou remboursé</h3>
-              <p>Garantie 7 à 15 jours pour ta première commande.</p>
+              <p>Garantie de 7 jours après livraison.</p>
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 24 }}>
@@ -172,7 +176,14 @@ export default async function Home() {
           <h2>Envie de tester le siwak ?</h2>
           <p>Commande ton produit en quelques minutes directement sur le site.</p>
           <div className="btn-row" style={{ justifyContent: "center" }}>
-            <Link href="/produits" className="btn btn-primary" style={{ background: "#fff", color: "var(--green-dark)" }}>
+            <OrderCTA
+              className="btn btn-primary"
+              contentName="Commande générale Siwakare"
+              pickProduct
+            >
+              Commander maintenant
+            </OrderCTA>
+            <Link href="/produits" className="btn btn-outline" style={{ background: "#fff", color: "var(--green-dark)" }}>
               Voir les produits
             </Link>
           </div>
