@@ -160,7 +160,7 @@ export default function DashboardPage() {
             </div>
           </div>
           <label>Produit (optionnel)</label>
-          <input value={product} onChange={(e) => setProduct(e.target.value)} style={inputStyle} placeholder="Pâte Dentifrice Siwakare — 3 achetées = 2 offertes" />
+          <input value={product} onChange={(e) => setProduct(e.target.value)} style={inputStyle} placeholder="Pâte Dentifrice Siwakare — Pack Essentiel (5 pâtes)" />
           <label>Note (optionnel)</label>
           <input value={note} onChange={(e) => setNote(e.target.value)} style={inputStyle} placeholder="Client fidèle, Dakar..." />
           <button type="submit" className="btn btn-primary" disabled={saving}>

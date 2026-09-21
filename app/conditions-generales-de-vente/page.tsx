@@ -22,8 +22,8 @@ export default function CGV() {
 
           <h2>2. Produits et prix</h2>
           <p>
-            Les prix sont indiqués en francs CFA (FCFA), hors frais de livraison. Les offres groupées (« 2 achetées, la
-            3ème offerte », etc.) et les promotions sont valables dans la limite des stocks et de la période indiquée
+            Les prix sont indiqués en francs CFA (FCFA), hors frais de livraison. Les offres groupées (« 2 achetées = 50 % de
+            réduction sur la 3ème », etc.) et les promotions sont valables dans la limite des stocks et de la période indiquée
             sur le site. Le prix applicable est celui affiché au moment de la commande.
           </p>
 
