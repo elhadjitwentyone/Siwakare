@@ -21,12 +21,6 @@ export function Header() {
           <Link href="/livraison-paiement">Livraison & paiement</Link>
           <Link href="/contact">Contact</Link>
         </nav>
-        <WhatsAppCTA
-          className="btn btn-whatsapp header-cta"
-          message="Salam, je souhaite avoir plus d'infos sur les packs Siwakare."
-        >
-          WhatsApp
-        </WhatsAppCTA>
       </div>
     </header>
   );
