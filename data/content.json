@@ -13,7 +13,7 @@
       "oldPrice": 3000,
       "featured": true,
       "freeGift": "1 brosse à dents offerte",
-      "image": "/images/1789476168239-rmvbg-siwakare.png",
+      "image": "/images/1790011362972-rmvbg-siwakare.webp",
       "includes": [
         "1 pâte dentifrice au siwak",
         "1 brosse à dents offerte",
@@ -29,19 +29,19 @@
           "id": "simple",
           "label": "1 pâte + 1 brosse à dents offerte",
           "price": 2000,
-          "image": "/images/1789476488621-5.jpeg",
+          "image": "/images/1790011387250-rmvbg-siwakare.webp",
           "oldPrice": 3000
         },
         {
           "id": "duo",
-          "label": "Pack 3 pâtes + 3 brosses — 2 achetées, la 3ème offerte (1 333 FCFA la pâte)",
+          "label": "Pack Découverte — 2 achetées, la 3ème offerte (1 333 FCFA la pâte)",
           "price": 4000,
           "image": "/images/1789476619997-5.jpeg",
           "oldPrice": 6000
         },
         {
           "id": "trio",
-          "label": "Pack 5 pâtes + 5 brosses — 3 achetées, 2 offertes (1 200 FCFA la pâte)",
+          "label": "Pack Essentiel — 3 achetées, 2 offertes (1 200 FCFA la pâte)",
           "price": 6000,
           "image": "/images/1789476629268-6.jpeg",
           "oldPrice": 10000
