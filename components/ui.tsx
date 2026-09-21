@@ -9,8 +9,8 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link href="/" className="logo">
-          Siwak<span className="accent">are</span>
+        <Link href="/" className="logo" aria-label="Siwakare — accueil">
+          <img src="/logo-siwakare.png" alt="Siwakare" />
         </Link>
         <nav className="nav">
           <Link href="/produits">Nos produits</Link>
@@ -32,7 +32,7 @@ export function Footer() {
       <div className="container footer-inner">
         <div>
           <div className="logo">
-            Siwak<span className="accent">are</span>
+            <img src="/logo-siwakare-blanc.png" alt="Siwakare" />
           </div>
           <p>Le siwak, l'hygiène bucco-dentaire naturelle et prophétique — livré chez vous au Sénégal.</p>
         </div>

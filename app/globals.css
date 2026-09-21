@@ -251,3 +251,7 @@ ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--
 .variant-badge { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--gold); color: var(--green-dark); font-size: .72rem; font-weight: 700; white-space: nowrap; }
 .delivery-note { font-weight: 600; color: var(--green-dark); margin: 4px 0 0; }
 .modal-delivery { background: var(--green-light); border-radius: 8px; padding: 8px 12px; font-size: .9rem; margin: 0 0 12px; color: var(--green-dark); }
+
+.logo img { display: block; height: 40px; width: auto; }
+.footer-inner .logo img { height: 44px; }
+@media (max-width: 640px) { .logo img { height: 34px; } }
