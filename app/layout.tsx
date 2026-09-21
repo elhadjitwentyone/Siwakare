@@ -4,6 +4,7 @@ import { Header, Footer } from "@/components/ui";
 import { PromoBar } from "@/components/PromoBar";
 import { Analytics } from "@/components/Analytics";
 import { UtmCapture } from "@/components/UtmCapture";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Siwakare — Le siwak naturel, sunna et écologique | Sénégal",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+                <VercelAnalytics />
       </body>
     </html>
   );
