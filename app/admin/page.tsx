@@ -299,7 +299,7 @@ export default function AdminPage() {
           <h3 style={{ marginTop: 20 }}>Formules / offres groupées</h3>
           {(p.variants || []).map((v, vi) => (
             <div key={v.id} style={cardStyle}>
-              <label>Libellé (ex: "2 achetées = 50 % de réduction sur la 3ème (3 pâtes + 3 brosses)")</label>
+              <label>Libellé (ex: "2 achetées, la 3ème offerte (3 pâtes + 3 brosses)")</label>
               <input
                 value={v.label}
                 onChange={(e) => updateVariant(i, vi, { label: e.target.value })}

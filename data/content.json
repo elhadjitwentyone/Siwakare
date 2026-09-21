@@ -9,7 +9,7 @@
       "slug": "pate-dentifrice-siwakare",
       "name": "Pâte Dentifrice Siwakare",
       "tagline": "Le siwak sous une forme pratique pour un usage quotidien — avec une brosse à dents offerte.",
-      "price": 2000,
+      "price": 2500,
       "oldPrice": 3000,
       "featured": true,
       "freeGift": "1 brosse à dents offerte",
@@ -28,23 +28,23 @@
         {
           "id": "simple",
           "label": "1 pâte + 1 brosse à dents offerte",
-          "price": 2000,
+          "price": 2500,
           "image": "/images/1790011387250-rmvbg-siwakare.webp",
           "oldPrice": 3000
         },
         {
           "id": "duo",
-          "label": "Pack Découverte — 3 pâtes + 3 brosses : 2 achetées = 50 % de réduction sur la 3ème (1 667 FCFA la pâte)",
+          "label": "Pack Découverte — 2 achetées, la 3ème offerte (1 667 FCFA la pâte)",
           "price": 5000,
           "image": "/images/1789476619997-5.jpeg",
-          "oldPrice": 6000
+          "oldPrice": 7500
         },
         {
           "id": "trio",
-          "label": "Pack Essentiel — 5 pâtes + 5 brosses : 3 achetées = 62,5 % de réduction sur les 2 suivantes (1 500 FCFA la pâte) · livraison offerte à Dakar",
+          "label": "Pack Essentiel — 3 achetées, 2 offertes (1 500 FCFA la pâte) · livraison offerte à Dakar",
           "price": 7500,
           "image": "/images/1789476629268-6.jpeg",
-          "oldPrice": 10000
+          "oldPrice": 12500
         }
       ],
       "faq": [
@@ -58,7 +58,7 @@
         },
         {
           "q": "Les offres groupées incluent-elles une brosse par pâte ?",
-          "a": "Oui, le nombre de brosses offertes correspond toujours au nombre total de pâtes reçues dans le pack, y compris celles vendues à prix réduit."
+          "a": "Oui, le nombre de brosses offertes correspond toujours au nombre total de pâtes reçues — offertes comprises, pas seulement celles achetées."
         },
         {
           "q": "Convient-elle aux enfants ?",
