@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getOrders, Order } from "@/lib/orders";
 import { sendOrderEmail } from "@/lib/email";
+import { pushOrderToNotion } from "@/lib/notion";
 
 const GITHUB_REPO = process.env.GITHUB_REPO;
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
@@ -83,6 +84,7 @@ export async function POST(req: NextRequest) {
     `<b>Téléphone :</b> ${escapeHtml(phone)}<br/>` +
     `<b>Adresse :</b> ${escapeHtml(address)}</p>`;
   const notif = await sendOrderEmail(`Nouvelle commande : ${product}`, html);
+  const notion = await pushOrderToNotion(order);
 
-  return NextResponse.json({ ok: true, saved, notified: notif.ok });
+  return NextResponse.json({ ok: true, saved, notified: notif.ok, notionSynced: notion.ok });
 }
