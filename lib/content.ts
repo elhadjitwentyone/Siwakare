@@ -1,4 +1,5 @@
 import fallback from "@/data/content.json";
+import { fetchGithubFile } from "@/lib/github";
 
 // Une variante = une formule d'achat pour le même produit (unité seule,
 // offre groupée...). Le client choisit une variante ; prix et image
@@ -52,23 +53,16 @@ export type Content = {
   };
 };
 
-const GITHUB_REPO = process.env.GITHUB_REPO; // ex: "owner/siwakare"
-const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
-
 // Le contenu (textes, prix, images des packs) est stocké dans data/content.json
 // sur GitHub. L'admin (/admin) le modifie directement via l'API GitHub — ça
 // n'a AUCUN impact sur les déploiements Vercel (aucun rebuild déclenché).
 // On lit ce fichier à chaque requête pour que les modifications soient
 // visibles immédiatement, sans redéploiement.
 export async function getContent(): Promise<Content> {
-  if (!GITHUB_REPO) return fallback as Content;
+  const text = await fetchGithubFile("data/content.json");
+  if (!text) return fallback as Content;
   try {
-    const res = await fetch(
-      `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/data/content.json`,
-      { cache: "no-store" }
-    );
-    if (!res.ok) return fallback as Content;
-    return (await res.json()) as Content;
+    return JSON.parse(text) as Content;
   } catch {
     return fallback as Content;
   }
