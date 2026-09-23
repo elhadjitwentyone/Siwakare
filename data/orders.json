@@ -1,16 +1,6 @@
 {
   "orders": [
     {
-      "id": "1790163939830",
-      "date": "2026-09-23T11:45:39.830Z",
-      "product": "Test connexion Notion",
-      "price": 0,
-      "delivery": "Test",
-      "name": "TEST V�rif Notion",
-      "address": "Test - � supprimer",
-      "phone": "770000000"
-    },
-    {
       "id": "1790159092782",
       "date": "2026-09-23T10:24:52.782Z",
       "product": "Pâte Dentifrice Siwakare — Pack Essentiel — 3 achetées, 2 offertes · livraison offerte à Dakar",
