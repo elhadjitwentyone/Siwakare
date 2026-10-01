@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
+import { normalizePhone, sha256 } from "@/lib/meta";
 
 // Conversions API Meta : double du Pixel navigateur pour les événements qui
 // se perdent (bloqueurs de pub, Safari/iOS 14+). Même event_id que le Pixel
@@ -8,21 +8,6 @@ import crypto from "crypto";
 // navigateur continue de fonctionner seul.
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const CAPI_TOKEN = process.env.META_CAPI_ACCESS_TOKEN;
-
-function sha256(value: string): string {
-  return crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
-}
-
-// Numéro sénégalais local (9 chiffres, ex: 77 000 00 00) -> indicatif 221
-// ajouté, requis par Meta pour le hachage. Un numéro déjà international
-// est laissé tel quel (chiffres seuls).
-function normalizePhone(raw: string): string | null {
-  const digits = raw.replace(/\D/g, "");
-  if (!digits) return null;
-  if (digits.startsWith("221")) return digits;
-  if (digits.length === 9) return `221${digits}`;
-  return digits;
-}
 
 export async function POST(req: NextRequest) {
   if (!PIXEL_ID || !CAPI_TOKEN) {

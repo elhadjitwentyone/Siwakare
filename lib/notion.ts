@@ -34,7 +34,6 @@ export async function pushOrderToNotion(order: Order): Promise<{ ok: boolean; er
           "Prix FCFA": { number: order.price },
           Livraison: { rich_text: [{ text: { content: order.delivery || "" } }] },
           "Date commande": { date: { start: dateOnly } },
-          Statut: { select: { name: "Nouvelle" } },
           "ID commande": { rich_text: [{ text: { content: order.id } }] },
         },
       }),
@@ -43,5 +42,80 @@ export async function pushOrderToNotion(order: Order): Promise<{ ok: boolean; er
     return { ok: true };
   } catch (e) {
     return { ok: false, error: String(e) };
+  }
+}
+
+export type DeliveredOrder = {
+  pageId: string;
+  orderId: string;
+  name: string;
+  phone: string;
+  product: string;
+  price: number;
+};
+
+const notionHeaders = () => ({
+  Authorization: `Bearer ${NOTION_TOKEN}`,
+  "Notion-Version": NOTION_VERSION,
+  "Content-Type": "application/json",
+});
+
+const plainText = (items: any): string => (Array.isArray(items) ? items.map((t: any) => t?.plain_text || "").join("") : "");
+
+// Commandes livrées (État = "Terminé") pas encore transmises à Meta.
+export async function getDeliveredOrdersToSend(): Promise<{ ok: true; orders: DeliveredOrder[] } | { ok: false; error: string }> {
+  if (!NOTION_TOKEN || !NOTION_DATABASE_ID) {
+    return { ok: false, error: "NOTION_TOKEN / NOTION_DATABASE_ID non configurés sur Vercel." };
+  }
+  const orders: DeliveredOrder[] = [];
+  let cursor: string | undefined;
+  try {
+    do {
+      const res = await fetch(`https://api.notion.com/v1/databases/${NOTION_DATABASE_ID}/query`, {
+        method: "POST",
+        headers: notionHeaders(),
+        cache: "no-store",
+        body: JSON.stringify({
+          page_size: 100,
+          ...(cursor ? { start_cursor: cursor } : {}),
+          filter: {
+            and: [
+              { property: "État", status: { equals: "Terminé" } },
+              { property: "Envoyé à Meta", checkbox: { equals: false } },
+            ],
+          },
+        }),
+      });
+      if (!res.ok) return { ok: false, error: await res.text() };
+      const data = await res.json();
+      for (const page of data.results || []) {
+        const props = page.properties || {};
+        orders.push({
+          pageId: page.id,
+          orderId: plainText(props["ID commande"]?.rich_text),
+          name: plainText(props["Client"]?.title),
+          phone: props["Téléphone"]?.phone_number || "",
+          product: plainText(props["Produit"]?.rich_text),
+          price: props["Prix FCFA"]?.number || 0,
+        });
+      }
+      cursor = data.has_more ? data.next_cursor : undefined;
+    } while (cursor);
+    return { ok: true, orders };
+  } catch (e) {
+    return { ok: false, error: String(e) };
+  }
+}
+
+export async function markOrderSentToMeta(pageId: string): Promise<boolean> {
+  try {
+    const res = await fetch(`https://api.notion.com/v1/pages/${pageId}`, {
+      method: "PATCH",
+      headers: notionHeaders(),
+      body: JSON.stringify({ properties: { "Envoyé à Meta": { checkbox: true } } }),
+    });
+    return res.ok;
+  } catch {
+    return false;
   }
 }
