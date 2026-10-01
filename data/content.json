@@ -34,7 +34,7 @@
         },
         {
           "id": "duo",
-          "label": "Pack Découverte — 2 achetées, la 3ème offerte",
+          "label": "Pack Découverte — 2 achetées, la 3ème offerte · livraison offerte à Dakar",
           "price": 5000,
           "image": "/images/1789476619997-5.jpeg",
           "oldPrice": 9000
@@ -162,7 +162,7 @@
   },
   "livraison": {
     "zones": [
-      "Dakar et banlieue : 1 000 FCFA (offerte dès le Pack Essentiel), livraison sous 24 à 48h",
+      "Dakar et banlieue : 1 000 FCFA (offerte sur tous les packs), livraison sous 24 à 48h",
       "Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours",
       "Autres localités : sur demande, contacte-nous via la page Contact"
     ],

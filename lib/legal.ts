@@ -17,7 +17,7 @@ export const LEGAL = {
 
 export const RETURN_DAYS = 7;
 export const DELIVERY_FEE_DAKAR = 1000;
-// Livraison offerte à Dakar à partir de ce montant (= Pack Essentiel, 5 pâtes).
-export const FREE_DELIVERY_MIN_PRICE = 7500;
+// Livraison offerte à Dakar à partir de ce montant (= Pack Découverte, le moins cher des packs).
+export const FREE_DELIVERY_MIN_PRICE = 5000;
 export const isFreeDelivery = (price: number) => price >= FREE_DELIVERY_MIN_PRICE;
-export const LAST_UPDATE = "21 septembre 2026";
+export const LAST_UPDATE = "1er octobre 2026";
