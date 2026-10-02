@@ -41,10 +41,17 @@
         },
         {
           "id": "trio",
-          "label": "Pack Essentiel — 3 achetées, 2 offertes · livraison offerte à Dakar",
+          "label": "Pack Essentiel — 3 achetées, 2 offertes",
           "price": 9000,
           "image": "/images/1789476629268-6.jpeg",
           "oldPrice": 15000
+        },
+        {
+          "id": "famille",
+          "label": "Pack Famille — 4 achetées, 3 offertes + 2 siwak offerts · livraison offerte à Dakar",
+          "price": 12000,
+          "image": "/images/pack-famille.jpeg",
+          "oldPrice": 21000
         }
       ],
       "faq": [
@@ -162,7 +169,7 @@
   },
   "livraison": {
     "zones": [
-      "Dakar et banlieue : 1 000 FCFA (offerte dès le Pack Essentiel), livraison sous 24 à 48h",
+      "Dakar et banlieue : 1 000 FCFA (offerte avec le Pack Famille), livraison sous 24 à 48h",
       "Thiès, Saly, Ziguinchor et autres grandes villes : 2 à 4 jours",
       "Autres localités : sur demande, contacte-nous via la page Contact"
     ],
