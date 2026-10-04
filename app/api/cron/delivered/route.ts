@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDeliveredOrdersToSend, markOrderSentToMeta } from "@/lib/notion";
+import { getDeliveredOrdersToSend, getNotionOrderIdsSince, markOrderSentToMeta, pushOrderToNotion } from "@/lib/notion";
 import { isMetaCapiConfigured, normalizePhone, sendMetaEvents, sha256 } from "@/lib/meta";
+import { getOrders } from "@/lib/orders";
 
 export const dynamic = "force-dynamic";
 
@@ -13,22 +14,45 @@ const EVENT_NAME = "CommandeLivree";
 // Meta chaque commande passée à "Terminé" dans Notion et pas encore
 // transmise, puis coche "Envoyé à Meta" pour ne jamais l'envoyer deux fois.
 // ?dry=1 liste ce qui serait envoyé, sans rien envoyer ni cocher.
+//
+// Avant cela, rattrapage Notion : toute commande du site (data/orders.json)
+// des 3 derniers jours absente de Notion y est recréée. La fenêtre est
+// volontairement courte pour ne pas ressusciter d'anciens doublons supprimés
+// à la main dans Notion.
+const CATCH_UP_DAYS = 3;
+
+async function catchUpNotion(dry: boolean) {
+  const since = new Date(Date.now() - CATCH_UP_DAYS * 86_400_000);
+  const existing = await getNotionOrderIdsSince(since.toISOString().slice(0, 10));
+  if ("error" in existing) return { error: existing.error };
+  const { orders } = await getOrders();
+  const missing = orders.filter((o) => new Date(o.date) >= since && !existing.ids.has(o.id));
+  if (dry) return { missing: missing.length };
+  let added = 0;
+  for (const order of missing) {
+    if ((await pushOrderToNotion(order)).ok) added++;
+  }
+  return { missing: missing.length, added };
+}
+
 export async function GET(req: NextRequest) {
   const secret = process.env.CRON_SECRET;
   if (!secret) return NextResponse.json({ error: "CRON_SECRET non configuré." }, { status: 503 });
   if (req.headers.get("authorization") !== `Bearer ${secret}`) {
     return NextResponse.json({ error: "Non autorisé." }, { status: 401 });
   }
+  const dry = req.nextUrl.searchParams.get("dry") === "1";
+  const notionCatchUp = await catchUpNotion(dry);
+
   if (!isMetaCapiConfigured()) {
-    return NextResponse.json({ error: "Pixel / token Conversions API non configurés." }, { status: 503 });
+    return NextResponse.json({ notionCatchUp, error: "Pixel / token Conversions API non configurés." }, { status: 503 });
   }
 
   const pending = await getDeliveredOrdersToSend();
-  if ("error" in pending) return NextResponse.json({ error: pending.error }, { status: 502 });
+  if ("error" in pending) return NextResponse.json({ notionCatchUp, error: pending.error }, { status: 502 });
 
-  const dry = req.nextUrl.searchParams.get("dry") === "1";
   if (dry) {
-    return NextResponse.json({ dry: true, toSend: pending.orders.length, total: pending.orders.reduce((s, o) => s + o.price, 0) });
+    return NextResponse.json({ dry: true, notionCatchUp, toSend: pending.orders.length, total: pending.orders.reduce((s, o) => s + o.price, 0) });
   }
 
   let sent = 0;
@@ -71,5 +95,5 @@ export async function GET(req: NextRequest) {
     sent++;
   }
 
-  return NextResponse.json({ sent, skipped: skipped.length, failed: failed.length, failedIds: failed });
+  return NextResponse.json({ notionCatchUp, sent, skipped: skipped.length, failed: failed.length, failedIds: failed });
 }

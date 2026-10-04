@@ -107,6 +107,41 @@ export async function getDeliveredOrdersToSend(): Promise<{ ok: true; orders: De
   }
 }
 
+// "ID commande" des fiches Notion datées de `sinceDate` (YYYY-MM-DD) ou après.
+// Sert au rattrapage : comparer avec data/orders.json pour retrouver les
+// commandes dont l'envoi vers Notion a échoué au moment de la commande.
+export async function getNotionOrderIdsSince(sinceDate: string): Promise<{ ok: true; ids: Set<string> } | { ok: false; error: string }> {
+  if (!NOTION_TOKEN || !NOTION_DATABASE_ID) {
+    return { ok: false, error: "NOTION_TOKEN / NOTION_DATABASE_ID non configurés sur Vercel." };
+  }
+  const ids = new Set<string>();
+  let cursor: string | undefined;
+  try {
+    do {
+      const res = await fetch(`https://api.notion.com/v1/databases/${NOTION_DATABASE_ID}/query`, {
+        method: "POST",
+        headers: notionHeaders(),
+        cache: "no-store",
+        body: JSON.stringify({
+          page_size: 100,
+          ...(cursor ? { start_cursor: cursor } : {}),
+          filter: { property: "Date commande", date: { on_or_after: sinceDate } },
+        }),
+      });
+      if (!res.ok) return { ok: false, error: await res.text() };
+      const data = await res.json();
+      for (const page of data.results || []) {
+        const id = plainText(page.properties?.["ID commande"]?.rich_text);
+        if (id) ids.add(id);
+      }
+      cursor = data.has_more ? data.next_cursor : undefined;
+    } while (cursor);
+    return { ok: true, ids };
+  } catch (e) {
+    return { ok: false, error: String(e) };
+  }
+}
+
 export async function markOrderSentToMeta(pageId: string): Promise<boolean> {
   try {
     const res = await fetch(`https://api.notion.com/v1/pages/${pageId}`, {
