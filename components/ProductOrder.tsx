@@ -27,7 +27,7 @@ export function ProductOrder({
   outOfStock?: boolean;
   variants?: Variant[];
 }) {
-  // Le pack à livraison offerte (Pack Famille) est présélectionné : c'est
+  // Le premier pack à livraison offerte (Pack Essentiel) est présélectionné : c'est
   // celui qui rapporte le plus par commande.
   const startVariant = variants?.find((v) => isFreeDelivery(v.price)) ?? variants?.[0];
   const [selectedId, setSelectedId] = useState(startVariant?.id);
@@ -82,7 +82,7 @@ export function ProductOrder({
             🚚{" "}
             {isFreeDelivery(activePrice)
               ? "Livraison offerte à Dakar"
-              : `Livraison Dakar : ${DELIVERY_FEE_DAKAR.toLocaleString("fr-FR")} FCFA — offerte avec le Pack Famille`}
+              : `Livraison Dakar : ${DELIVERY_FEE_DAKAR.toLocaleString("fr-FR")} FCFA — offerte dès le Pack Essentiel`}
           </p>
 
           <div className="btn-row" style={{ marginTop: 24 }}>

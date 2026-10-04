@@ -36,7 +36,7 @@ export function PromoBar() {
     <div className="promo-bar">
       <span>
         🚚 Livraison Dakar {DELIVERY_FEE_DAKAR.toLocaleString("fr-FR")} FCFA —{" "}
-        <strong>offerte avec le Pack Famille</strong>
+        <strong>offerte dès le Pack Essentiel</strong>
       </span>
       {timeLeft && (
         <span className="promo-countdown">
