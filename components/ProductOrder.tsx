@@ -27,9 +27,9 @@ export function ProductOrder({
   outOfStock?: boolean;
   variants?: Variant[];
 }) {
-  // Le premier pack à livraison offerte (Pack Essentiel) est présélectionné : c'est
-  // celui qui rapporte le plus par commande.
-  const startVariant = variants?.find((v) => isFreeDelivery(v.price)) ?? variants?.[0];
+  // Le Pack Essentiel ("trio") est présélectionné : c'est celui qui rapporte le plus
+  // par commande. Le Pack Famille, seul à livraison offerte, est en rupture.
+  const startVariant = variants?.find((v) => v.id === "trio") ?? variants?.[0];
   const [selectedId, setSelectedId] = useState(startVariant?.id);
   const selected = variants?.find((v) => v.id === selectedId) ?? startVariant;
 
@@ -82,7 +82,7 @@ export function ProductOrder({
             🚚{" "}
             {isFreeDelivery(activePrice)
               ? "Livraison offerte à Dakar"
-              : `Livraison Dakar : ${DELIVERY_FEE_DAKAR.toLocaleString("fr-FR")} FCFA — offerte dès le Pack Essentiel`}
+              : `Livraison Dakar : ${DELIVERY_FEE_DAKAR.toLocaleString("fr-FR")} FCFA — offerte avec le Pack Famille`}
           </p>
 
           <div className="btn-row" style={{ marginTop: 24 }}>
