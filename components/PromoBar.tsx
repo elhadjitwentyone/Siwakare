@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { DELIVERY_FEE_DAKAR } from "@/lib/legal";
 
-// Fin des promos : 30 septembre 23:59:59, heure de Dakar (UTC+0, pas d'heure d'été).
-const PROMO_END = new Date("2026-09-30T23:59:59+00:00").getTime();
+// Fin des promos : 15 novembre 23:59:59, heure de Dakar (UTC+0, pas d'heure d'été).
+const PROMO_END = new Date("2026-11-15T23:59:59+00:00").getTime();
 
 function getTimeLeft() {
   const diff = PROMO_END - Date.now();
@@ -40,7 +40,7 @@ export function PromoBar() {
       </span>
       {timeLeft && (
         <span className="promo-countdown">
-          🔥 Promos jusqu'au 30/09
+          🔥 Promos jusqu'au 15/11
           <span className="promo-timer">
             {timeLeft.days}j {pad(timeLeft.hours)}h {pad(timeLeft.minutes)}m {pad(timeLeft.seconds)}s
           </span>
